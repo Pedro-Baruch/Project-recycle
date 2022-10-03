@@ -1,9 +1,7 @@
-import './images'
+import './styles.css'
 
 export const SideBar = () => {
     return(
-        <div>
-
-        </div>
+        <div></div>
     )
 }
