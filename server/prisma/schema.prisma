@@ -1,0 +1,169 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid())
+  name            String    @unique
+  email           String    
+  password        String
+  createdAt       DateTime  @default(now())
+
+  userProfile     UserProfile?
+  companyProfile CompanyProfile?
+}
+
+model Ad {
+  id                    String  @id @default(uuid())
+  title                 String
+  description           String
+  price                 Decimal
+  createdAt             DateTime @default(now())
+
+  userProfile           UserProfile   @relation(fields: [userProfileId], references: [id])
+  userProfileId         String 
+  ads                   AdByTag[]
+  companyRequests       CompanyRequests[]
+  userRequests          UserRequests[]
+  companyDenouncesAd    CompanyDenouncesAd[]
+  userDenouncesAd       UserDenouncesAd[]
+
+}
+
+model UserProfile {
+  id                String      @id @default(uuid())
+  user              User        @relation(fields: [userId], references: [id])
+  userId            String      @unique
+
+  ads               Ad[]
+  tags              Tag[]
+  userRequests      UserRequests[]
+  userDenouncesAd   UserDenouncesAd[]
+  denounceBetweenUserAndCompany   DenounceBetweenUserAndCompany[]
+}
+
+model Company {
+  id          String      @id @default(uuid())
+  name        String
+  cnpj        String
+
+  companyProfile CompanyProfile?
+}
+
+model CompanyProfile {
+  id                    String                @id @default(uuid())
+  user                  User                  @relation(fields: [userId], references: [id])
+  userId                String                @unique
+  company               Company               @relation(fields: [companyId], references: [id])
+  companyId             String                @unique
+
+  companyRequests       CompanyRequests[]
+  companyDenouncesAd    CompanyDenouncesAd[]
+  denounceBetweenUserAndCompany   DenounceBetweenUserAndCompany[]
+}
+
+model Tag {
+  id              String      @id @default(uuid())
+  name            String
+  userProfile     UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfileId   String
+
+  tags            AdByTag[]
+}
+
+model AdByTag {
+  ad              Ad          @relation(fields: [adId], references: [id])
+  adId            String
+  tag             Tag         @relation(fields: [tagId], references: [id])
+  tagId           String
+  assignedAt      DateTime    @default(now())
+  assignedBy      String
+
+  @@id([adId, tagId])
+}
+
+model CompanyRequests {
+  id                String      @id @default(uuid())
+  ad                Ad          @relation(fields: [adId], references: [id])
+  adId              String
+  companyProfile    CompanyProfile     @relation(fields: [companyProfileId], references: [id])
+  companyProfileId  String      
+  assignedAt        DateTime    @default(now())
+  assignedBy        String
+
+  adSituation       AdSituation      @relation(fields: [adSituationId], references: [id])
+  adSituationId     String           @unique
+}
+
+model UserRequests {
+  id                String          @id @default(uuid())
+  ad                Ad              @relation(fields: [adId], references: [id])
+  adId              String
+  userProfile       UserProfile     @relation(fields: [userProfileId], references: [id])
+  userProfileId     String      
+  assignedAt        DateTime        @default(now())
+  assignedBy        String
+
+  adSituation       AdSituation      @relation(fields: [adSituationId], references: [id])
+  adSituationId     String           @unique
+}
+
+model AdSituation {
+  id                String            @id     @default(uuid())
+  sutuation         String
+  createdAt         DateTime          @default(now())
+  userRequests      UserRequests?
+  companyRequests   CompanyRequests?
+}
+
+model Denounce {
+  id                              String                @id     @default(uuid())
+  titulo                          String
+  description                     String
+  createdAt                       DateTime              @default(now())
+
+  companyDenouncesAd              CompanyDenouncesAd[]
+  userDenouncesAd                 UserDenouncesAd[]
+  denounceBetweenUserAndCompany   DenounceBetweenUserAndCompany[]
+}
+
+model CompanyDenouncesAd {
+  denounce          Denounce           @relation(fields: [denounceId], references: [id])
+  denounceId        String
+  ad                Ad                 @relation(fields: [adId], references: [id])
+  adId              String
+  companyProfile    CompanyProfile     @relation(fields: [companyProfileId], references: [id])
+  companyProfileId  String      
+
+  @@id([adId, companyProfileId, denounceId])
+}
+
+model UserDenouncesAd {
+  denounce          Denounce          @relation(fields: [denounceId], references: [id])
+  denounceId        String
+  ad                Ad                @relation(fields: [adId], references: [id])
+  adId              String
+  userProfile       UserProfile       @relation(fields: [userProfileId], references: [id])
+  userProfileId     String         
+
+  @@id([adId, userProfileId, denounceId])
+}
+
+model DenounceBetweenUserAndCompany {
+  denounce          Denounce          @relation(fields: [denounceId], references: [id])
+  denounceId        String
+  companyProfile    CompanyProfile     @relation(fields: [companyProfileId], references: [id])
+  companyProfileId  String  
+  userProfile       UserProfile     @relation(fields: [userProfileId], references: [id])
+  userProfileId     String 
+
+  @@id([companyProfileId, userProfileId, denounceId])
+}
