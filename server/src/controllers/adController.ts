@@ -15,7 +15,7 @@ export class AdController{
             {title, description, price, userProfileId: user}
         })
 
-        res.status(201).send()
+        return res.status(201).send()
     }
 
     public getAd = async(req: Request, res: Response) => {
@@ -24,17 +24,17 @@ export class AdController{
         const ad = await this.ads.ad.findUnique({where: {id}})
 
         if(!ad) {
-            res.status(400).json({mensagem: "Anúcio não encontrado"})
+            return res.status(400).json({mensagem: "Anúcio não encontrado"})
         }
 
-        res.status(200).json(ad)
+        return res.status(200).json(ad)
     }
 
     public getAll = async(req: Request, res: Response) => {
 
         const ad = await this.ads.ad.findMany()
 
-        res.status(200).json(ad)
+        return res.status(200).json(ad)
     }
 
     public delete = async(req: Request, res: Response) => {
@@ -42,7 +42,7 @@ export class AdController{
 
         const ad = await this.ads.ad.delete({where: {id}})
 
-        res.status(200).json(ad)
+        return res.status(200).json(ad)
     }
 
     public update = async(req: Request, res: Response) => {
@@ -50,7 +50,7 @@ export class AdController{
         const {title, description} = req.body
 
         if(!(title && description)) {
-            res.status(400).json({mensagem: "título e descrição não pode ser nulo"})
+            return res.status(400).json({mensagem: "título e descrição não pode ser nulo"})
         }
 
         const ad = await this.ads.ad.update({
@@ -58,7 +58,7 @@ export class AdController{
             data: {description, title}
         })
 
-        res.status(200).json(ad)
+        return res.status(200).json(ad)
     }
 
 }
