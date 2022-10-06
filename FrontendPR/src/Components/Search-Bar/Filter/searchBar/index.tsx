@@ -3,12 +3,6 @@ import TextField from "@mui/material/TextField";
 import Search  from '@mui/icons-material/Search';
 
 
-
-
-
-
-
-
 const SearchBar = () => {
   return (
       <div className="search-Bar">
@@ -17,9 +11,8 @@ const SearchBar = () => {
           variant="standard"
           label="Search"
           color='info'
-          
         />
-          <Search  sx={{fontSize: 40 ,color: 'black' }}/>
+          <Search  sx={{fontSize: 45 ,color: 'black' }}/>
         
         
       </div>
