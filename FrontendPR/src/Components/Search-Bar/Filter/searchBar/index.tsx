@@ -1,14 +1,27 @@
 import './style.css'
 import TextField from "@mui/material/TextField";
+import Search  from '@mui/icons-material/Search';
+
+
+
+
+
+
+
 
 const SearchBar = () => {
   return (
-      <div className="search">
+      <div className="search-Bar">
         <TextField
           id="outlined-basic"
-          variant="outlined"
+          variant="standard"
           label="Search"
+          color='info'
+          
         />
+          <Search  sx={{fontSize: 40 ,color: 'black' }}/>
+        
+        
       </div>
   );
 };
