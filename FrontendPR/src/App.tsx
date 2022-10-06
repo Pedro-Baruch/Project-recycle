@@ -1,10 +1,11 @@
-import './App.css'
+import { Header } from "./Components/Header-Full/Header"
+import './assets/App.css'
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  )
+return(
+<main>
+<Header></Header>
+</main>)
 }
 
 export default App
