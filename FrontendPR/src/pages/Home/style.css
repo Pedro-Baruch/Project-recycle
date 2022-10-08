@@ -1,0 +1,41 @@
+.Container{
+display: flex;
+flex-direction:column;
+background-color: #AEE1D3;
+justify-content: center;
+align-items: center;
+
+margin:5% 10% 5% 15%;
+min-height:600px;
+}
+.Container h1{
+    height: 15rem;
+
+}
+.input-controll{
+    height: 2rem;
+    display: flex;
+    width: 95%;
+    border-radius: 2rem ;
+}
+.form{
+    background-color: white;
+    height: 2rem;
+    border-radius: 2rem ;
+    margin: 5px;
+    width: 95%;
+    justify-content: initial;
+    display: flex;
+    flex-direction:row;
+    
+    gap: 1rem;
+    
+}
+.form label{
+    
+ padding-left: 20px;
+    display: flex;
+    align-items: center;
+    
+    
+  }

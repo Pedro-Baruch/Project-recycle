@@ -13,7 +13,7 @@ export const Header = () => {
     
           <Container>
       <FaBars onClick={showSiderbar} />
-      {sidebar && <Sidebar active={setSidebar} />}
+      {sidebar && <Sidebar onClick={setSidebar} active={setSidebar} />}
       
     </Container>
       

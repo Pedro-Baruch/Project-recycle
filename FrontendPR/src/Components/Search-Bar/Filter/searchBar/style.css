@@ -1,6 +1,6 @@
 .search-Bar{
     width: 20%;
-    
+    flex:2;
     float: right;
     
     font-style: italic;

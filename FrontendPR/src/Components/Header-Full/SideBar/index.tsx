@@ -13,10 +13,11 @@ import {
 
 interface ActiveProps {
 active:any
-
+onClick:any
 }
 
 import SidebarItem from '../Side-Itens'
+
 
 const Sidebar = ({ active }:ActiveProps) => {
 
@@ -32,8 +33,8 @@ const Sidebar = ({ active }:ActiveProps) => {
         
         <SidebarItem Icon={FaHome} Text="Home" />
         <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />
-        <SidebarItem Icon={FaRegFileAlt} Text="Anuncios" />
-        <SidebarItem Icon={FaEnvelope} Text="Notificações" />
+        <SidebarItem Icon={FaRegFileAlt} Text="Anuncios"  />
+        <SidebarItem Icon={FaEnvelope} Text="Notificações"  />
         <SidebarItem Icon={FaUserAlt} Text="Perfil" />
         <SidebarItem Icon={FaRegSun} Text="Configs" />
       </Content>
