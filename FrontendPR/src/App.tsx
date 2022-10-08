@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
 
 import './assets/App.css'
 import Footer from "./Components/Footer"
-import SearchBar from "./Components/Search-Bar/Filter/searchBar"
 
-import { Home } from "./pages/Home"
+
+import { Home as CriarAnuncio } from "./pages/Criar-Anuncio"
+import { Navigation } from "./Components/Nav"
 
 
 
@@ -15,8 +16,9 @@ function App() {
         <main>
             <Router>
                 <Header />
+                <Navigation/>
                     <Routes>
-                        <Route path='/create' element={<Home></Home>} />
+                        <Route path='/create' element={<CriarAnuncio></CriarAnuncio>} />
                     </Routes>
                 <Footer />
             </Router>

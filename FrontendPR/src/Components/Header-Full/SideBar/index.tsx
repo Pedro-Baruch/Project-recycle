@@ -17,6 +17,8 @@ onClick:any
 }
 
 import SidebarItem from '../Side-Itens'
+import { Link } from 'react-router-dom'
+
 
 
 const Sidebar = ({ active }:ActiveProps) => {
@@ -31,10 +33,10 @@ const Sidebar = ({ active }:ActiveProps) => {
       <Content>
         
         
-        <SidebarItem Icon={FaHome} Text="Home" />
-        <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />
-        <SidebarItem Icon={FaRegFileAlt} Text="Anuncios"  />
-        <SidebarItem Icon={FaEnvelope} Text="Notificações"  />
+       <Link to={'/'}><SidebarItem Icon={FaHome} Text="Home"></SidebarItem></Link> 
+        <SidebarItem Icon={FaIdCardAlt} Text="Empresa"  />
+        <Link to='/create'><SidebarItem Icon={FaRegFileAlt} Text="Anuncios"  /></Link>
+        <SidebarItem Icon={FaEnvelope} Text="Notificações"   />
         <SidebarItem Icon={FaUserAlt} Text="Perfil" />
         <SidebarItem Icon={FaRegSun} Text="Configs" />
       </Content>
