@@ -9,9 +9,6 @@ import { Container } from './styles'
 interface SideBarProps{
     Icon : IconType
     Text?: string
-    
-    
-    
 }
 
 const SidebarItem = ({ Icon, Text }:SideBarProps) => {
