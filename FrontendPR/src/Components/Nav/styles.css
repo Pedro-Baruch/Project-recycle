@@ -14,3 +14,10 @@ gap: 2rem;
 font-size:23px;
 
 }
+.Link p{
+    color: white;
+    
+}
+.Link{
+    text-decoration: none;
+}

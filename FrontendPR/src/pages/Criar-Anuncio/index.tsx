@@ -3,36 +3,83 @@ import './style.css'
 
 
 
-export const Home = () => {
+export const CriarAnuncio = () => {
     return (
         <main>
             <div className="Container">
-           
+                <h1>Registre Seu Anuncio</h1>
+                <form className="form" onSubmit={() => console.log('')}>
 
-                <h1>Registre seu anúncio</h1>
-            
-            <div className='form'>
-                  <label htmlFor="name">Name:</label>
-                  <input className='input-controll' />
-                </div>
-            <div className='form'>
-                  <label htmlFor="descrição">Descrição:</label>
-                  <input className='input-controll' />
-                </div>
-            <div className='form'>
-                  <label htmlFor="descrição">Descrição:</label>
-                  <input className='input-controll' />
-                </div>
-            <div className='form'>
-                  <label htmlFor="name">Preço(R$):</label>
-                  <input className='input-controll' />
-                </div>
-           
-<Button children='Enviar anuncio' height='50px' width='150px' onClick={()=>console.log('click')}></Button>
+                    <div className='bloco'>
+
+                    <label>Titulo: </label>
+                    <input
+                        className='input'
+                        type="text"
+                        name="titulo"
+                        placeholder="Titulo"
+                        // value={this.state.email}
+                        //  onChange={(e) => this.setState({ email: e.target.value })}
+                        />
+                        </div>
+
+                    <div className='bloco'>
+
+                    <label>Descrição: </label>
+                    <input
+                        className='input'
+                        type="text"
+                        name="descrição"
+                        placeholder="Descrição"
+                        // value={this.state.email}
+                        //  onChange={(e) => this.setState({ email: e.target.value })}
+                        />
+                        </div>
+
+                    <div className='bloco'>
+
+                    <label>Preço: </label>
+                    <input
+                        className='input'
+                        type="text"
+                        name="valor"
+                        placeholder="Valor(R$)"
+                        // value={this.state.email}
+                        //  onChange={(e) => this.setState({ email: e.target.value })}
+                        />
+                        </div>
+
+                    <div className='bloco'>
+
+                    <label>tags: </label>
+                    <input
+                        className='input'
+                        type="text"
+                        name="tags"
+                        placeholder="#tags"
+                        // value={this.state.email}
+                        //  onChange={(e) => this.setState({ email: e.target.value })}
+                        />
+                        </div>
+
+                    <div className='bloco'>
+
+                    <label>Valor: </label>
+                    <input
+                        className='input'
+                        type="text"
+                        name="valor"
+                        placeholder="Valor(R$)"
+                        // value={this.state.email}
+                        //  onChange={(e) => this.setState({ email: e.target.value })}
+                        />
+                        </div>
+                    <Button children='add' height='50px' width='120px' onClick={() => console.log('')} />
+                </form>
 
             </div>
 
-            
+
         </main>
 
     )

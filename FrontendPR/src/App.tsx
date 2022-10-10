@@ -5,8 +5,9 @@ import './assets/App.css'
 import Footer from "./Components/Footer"
 
 
-import { Home as CriarAnuncio } from "./pages/Criar-Anuncio"
+import { CriarAnuncio as CriarAnuncio } from "./pages/Criar-Anuncio"
 import { Navigation } from "./Components/Nav"
+import { ExibirAnuncio } from './pages/Exibir-Anuncios/index';
 
 
 
@@ -18,7 +19,8 @@ function App() {
                 <Header />
                 <Navigation/>
                     <Routes>
-                        <Route path='/create' element={<CriarAnuncio></CriarAnuncio>} />
+                        <Route path='/create' element={<CriarAnuncio/>} />
+                        <Route path='/home/anuncio' element={<ExibirAnuncio/>} />
                     </Routes>
                 <Footer />
             </Router>

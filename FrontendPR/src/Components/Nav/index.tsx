@@ -8,10 +8,10 @@ export const Navigation = () => {
 
     return (
         <nav className='nav'>
-            <Link to='/'>
+            <Link className='Link' to='/home/anuncio'>
                 <p>anuncio</p>
             </Link>
-            <Link to='/create'>
+            <Link className='Link' to='/'>
                 <p>empresa</p>
             </Link>
             
