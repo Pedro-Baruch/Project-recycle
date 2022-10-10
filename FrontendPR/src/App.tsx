@@ -15,7 +15,7 @@ function App() {
                 <Header />
                 <Navigation/>
                     <Routes>
-                        <Route path='/create' element={<CriarAnuncio/>} />
+                        
                         <Route path='/home/anuncio' element={<ExibirAnuncio/>} />
                     </Routes>
                 <Footer />
