@@ -1,9 +1,18 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import Button from '../../Components/Button'
 import './style.css'
 
-
-
 export const Home = () => {
+
+    const [ad, setAd] = useState([])
+
+    useEffect(() => {
+        axios("http://localhost:3000/ads").then(response => {
+          console.log(response.data)
+        })
+      }, [])
+
     return (
         <main>
             <div className="Container">
