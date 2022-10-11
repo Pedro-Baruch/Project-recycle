@@ -6,10 +6,9 @@ li {
   list-style-type: none;
 }
 
-.box-anuncio{
-    display: flex;
-    justify-content: center;
-    padding-bottom:2rem;
-    border-radius:2rem;
+.box-anuncio {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  border-radius: 2rem;
 }
-
