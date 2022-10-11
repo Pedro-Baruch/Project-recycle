@@ -9,7 +9,7 @@ interface Ad {
   Preço: number;
 }
 
-export function CarsFetchPage() {
+export function adFetchPage() {
   const [ad, setAd] = useState<Ad[]>([]);
 
   useEffect(() => {
