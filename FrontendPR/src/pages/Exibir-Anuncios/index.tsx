@@ -1,12 +1,11 @@
-import Button from "../../Components/Button";
-import { adFetchPage } from "../Ad";
-import "./style.css";
+import "./show.css";
+import { PostFetchPage } from "../ShowPosts";
 
 export const ExibirAnuncio = () => {
   return (
     <main>
       <div className="Container">
-        <adFetchPage />
+        <PostFetchPage />
       </div>
     </main>
   );
