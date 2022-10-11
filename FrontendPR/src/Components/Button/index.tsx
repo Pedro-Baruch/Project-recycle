@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+
 interface Props {
   children?: React.ReactNode;
   onClick: () => void;

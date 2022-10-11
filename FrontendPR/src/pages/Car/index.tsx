@@ -1,7 +1,7 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
 
-interface Post {
+interface Ad {
   id: number;
   titulo: string;
   nome: string;
@@ -10,7 +10,7 @@ interface Post {
 }
 
 export function CarsFetchPage() {
-  const [cars, setCars] = useState<Post[]>([]);
+  const [ad, setAd] = useState<Ad[]>([]);
 
   useEffect(() => {
     const URL = "http://localhost:3000/posts";
@@ -20,7 +20,7 @@ export function CarsFetchPage() {
 
     fetch(URL, options)
       .then((response) => response.json())
-      .then((data) => setCars(data));
+      .then((data) => setAd(data));
   }, []);
 
   return (
@@ -32,16 +32,16 @@ export function CarsFetchPage() {
             color: "black",
             fontSize: "23px",
           }}>
-          {cars.map((car) => (
+          {ad.map((ad) => (
             <section className="box-anuncio">
-              <li key={car.id}>
-                Nome: {car.nome}
+              <li key={ad.id}>
+                Nome: {ad.nome}
                 <br />
-                Descrição : {car.Descrição}
+                Descrição : {ad.Descrição}
                 <br />
-                Preço: {car.Preço}
+                Preço: {ad.Preço}
                 <br />
-                Titulo: {car.titulo}
+                Titulo: {ad.titulo}
               </li>
             </section>
           ))}
