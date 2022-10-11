@@ -1,100 +1,121 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { FormEvent,  useState } from 'react'
 import Button from '../../Components/Button'
-import './style.css'
+import './create.css'
 
 
+interface Post {
+
+    id?: number
+    titulos: string
+    descrição: string
+    preços: number
+    tag :string
+}
 
 export const CriarAnuncio = () => {
 
 
+     
 
-    const [ad, setAd] = useState([])
-
-    useEffect(() => {
-        axios("http://localhost:3000/ads").then(response => {
-          console.log(response.data)
-        })
-      }, [])
+        const [posts, setPosts] = useState<Post[]>([])
+        const [titulos, setTitulos] = useState('')
+        const [preços, setPreços] = useState('')
+        const [descrição, setDescrição] = useState('')
+        const [tag, setTag] = useState('')
 
 
-    return (
-        <main>
-            <div className="Container">
-                <h1>Registre Seu Anuncio</h1>
-                <form className="form" onSubmit={() => console.log('')}>
+        const URL = 'http://localhost:3000/posts'
+        const config: AxiosRequestConfig = {
+            headers: {
+                Accept: "application/json"
+            }
+        }
 
-                    <div className='bloco'>
 
-                    <label>Titulo: </label>
-                    <input
-                        className='input'
-                        type="text"
-                        name="titulo"
-                        placeholder="Titulo"
-                        // value={this.state.email}
-                        //  onChange={(e) => this.setState({ email: e.target.value })}
-                        />
+        const handleSubmit = async (event: FormEvent) => {
+
+            event.preventDefault()
+            console.log(`Submeteu... Name: ${titulos}, Valor: R$ ${preços} ${tag}${descrição}`)
+
+            const response = await axios.post<any, AxiosResponse<Post, any>, Post>(URL, { titulos,descrição,preços: Number(preços),tag })
+            
+            const aux = response.data
+            posts.push(aux)
+            setPosts([...posts, aux])
+            alert('Carro cadastrado!')
+        }
+
+
+
+        return (
+            <main>
+                <div className="Container">
+                    <h1>Registre Seu Anuncio</h1>
+                    <form className="form" onSubmit={handleSubmit}>
+
+                        <div className='bloco'>
+
+                            <label>Titulo: </label>
+                            <input
+                                className='input'
+                                type="text"
+                                name="titulo"
+                                placeholder="Titulo"
+                             value={titulos}
+                             onChange={(e)=>{setTitulos(e.target.value)}} 
+                            />
                         </div>
 
-                    <div className='bloco'>
+                        <div className='bloco'>
 
-                    <label>Descrição: </label>
-                    <input
-                        className='input'
-                        type="text"
-                        name="descrição"
-                        placeholder="Descrição"
-                        // value={this.state.email}
-                        //  onChange={(e) => this.setState({ email: e.target.value })}
-                        />
+                            <label>Descrição: </label>
+                            <input
+                                className='input'
+                                type="text"
+                                name="descrição"
+                                placeholder="Descrição"
+                            value={descrição}
+                              onChange={(e) => setDescrição( e.target.value )}
+                            />
                         </div>
 
-                    <div className='bloco'>
+                        
 
-                    <label>Preço: </label>
-                    <input
-                        className='input'
-                        type="text"
-                        name="valor"
-                        placeholder="Valor(R$)"
-                        // value={this.state.email}
-                        //  onChange={(e) => this.setState({ email: e.target.value })}
-                        />
+
+
+                        <div className='bloco'>
+
+                            <label>tags: </label>
+                            <input
+                                className='input'
+                                type="text"
+                                name="tags"
+                                placeholder="#tags"
+                             value={tag}
+                            onChange={(e) => setTag(e.target.value )}
+                            />
                         </div>
 
-                    <div className='bloco'>
+                        <div className='bloco'>
 
-                    <label>tags: </label>
-                    <input
-                        className='input'
-                        type="text"
-                        name="tags"
-                        placeholder="#tags"
-                        // value={this.state.email}
-                        //  onChange={(e) => this.setState({ email: e.target.value })}
-                        />
+                            <label>Valor: </label>
+                            <input
+                                className='input'
+                                type="text"
+                                name="valor"
+                                placeholder="Valor(R$)"
+                             value={preços}
+                             onChange={(e) => setPreços(e.target.value )}
+                            />
                         </div>
+                        <Button children='add' height='50px' width='120px' onClick={() => console.log('')} />
+                    </form>
 
-                    <div className='bloco'>
-
-                    <label>Valor: </label>
-                    <input
-                        className='input'
-                        type="text"
-                        name="valor"
-                        placeholder="Valor(R$)"
-                        // value={this.state.email}
-                        //  onChange={(e) => this.setState({ email: e.target.value })}
-                        />
-                        </div>
-                    <Button children='add' height='50px' width='120px' onClick={() => console.log('')} />
-                </form>
-
-            </div>
+                </div>
 
 
-        </main>
+            </main>
 
-    )
-}
+        )
+    }

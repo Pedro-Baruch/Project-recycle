@@ -1,8 +1,25 @@
 {
-    "posts": [
-     
-      { "id": 2, "titulo": "baruk", "nome": "baruk","Preço":"R$34","Descrição":"pessimo produto" },
-      { "id": 3, "titulo": "basfasff", "nome": "asdfasdfk","Preço":"R$31234","Descrição":"pessimo produto" },
-      { "id": 7, "titulo": "baruk", "nome": "12312","Preço":"R$34","Descrição":"pessimo produto" }
-    ]
+  "posts": [
+    {
+      "titulos": "quero comprar latinhas",
+      "descrição": "nhame nhame quero latinhas deliciosas",
+      "preços": 130,
+      "tag": "#latinhas ",
+      "id": 9
+    },
+    {
+      "titulos": "quero comprar latinhas",
+      "descrição": "nhame nhame quero latinhas deliciosas",
+      "preços": 130,
+      "tag": "#latinhas ",
+      "id": 10
+    },
+    {
+      "titulos": "Bom Dia",
+      "descrição": "Quero vender garrafas de plastico que coletei",
+      "preços": 120,
+      "tag": "#plastico  #garrafas",
+      "id": 11
+    }
+  ]
 }

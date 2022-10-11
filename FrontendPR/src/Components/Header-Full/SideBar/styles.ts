@@ -8,6 +8,7 @@ export const Container = styled.div`
   left: 0px;
   width: 300px;
   animation: showSidebar .4s;
+  
   > svg {
     position: fixed;
     color: blue;
@@ -16,6 +17,7 @@ export const Container = styled.div`
     margin-top: 32px;
     margin-left: 32px;
     cursor: pointer;
+    
   }
   @keyframes showSidebar {
     from {

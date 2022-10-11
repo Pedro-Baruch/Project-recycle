@@ -1,6 +1,6 @@
 import Button from '../../Components/Button'
-import { CarsFetchPage } from '../Car'
-import './style.css'
+import { PostFetchPage } from '../ShowPosts'
+import './show.css'
 
 
 
@@ -8,11 +8,8 @@ export const ExibirAnuncio = () => {
     return (
         <main>
             <div className="Container">
-
-               <CarsFetchPage/>
+                <PostFetchPage />
             </div>
-
-            
         </main>
 
     )
