@@ -16,13 +16,7 @@ interface Post {
 
 
 export const CriarAnuncio = () => {
-  const [ad, setAd] = useState([]);
-
-  useEffect(() => {
-    axios("http://localhost:3000/ads").then((response) => {
-      console.log(response.data);
-    });
-  }, []);
+ 
 
 
      
