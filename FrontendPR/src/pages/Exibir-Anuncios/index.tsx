@@ -1,13 +1,13 @@
 
 import Button from "../../Components/Button";
-import { CarsFetchPage } from "../Car";
+import { adFetchPage } from "../Ad";
 import "./style.css";
 
 export const ExibirAnuncio = () => {
   return (
     <main>
       <div className="Container">
-        <CarsFetchPage />
+        <adFetchPage />
       </div>
     </main>
   );
