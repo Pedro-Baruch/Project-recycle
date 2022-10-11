@@ -1,0 +1,18 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom: 1px;
+
+  gap: 2rem;
+}
+.nav p {
+  font-size: 23px;
+}
+.Link p {
+  color: white;
+}
+.Link {
+  text-decoration: none;
+}
