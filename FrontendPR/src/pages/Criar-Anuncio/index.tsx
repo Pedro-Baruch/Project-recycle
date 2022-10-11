@@ -1,5 +1,6 @@
+
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { FormEvent,  useState } from 'react'
+import { FormEvent,  useEffect,  useState } from 'react'
 import Button from '../../Components/Button'
 import './create.css'
 
@@ -13,7 +14,15 @@ interface Post {
     tag :string
 }
 
+
 export const CriarAnuncio = () => {
+  const [ad, setAd] = useState([]);
+
+  useEffect(() => {
+    axios("http://localhost:3000/ads").then((response) => {
+      console.log(response.data);
+    });
+  }, []);
 
 
      
@@ -23,7 +32,6 @@ export const CriarAnuncio = () => {
         const [preços, setPreços] = useState('')
         const [descrição, setDescrição] = useState('')
         const [tag, setTag] = useState('')
-
 
         const URL = 'http://localhost:3000/posts'
         const config: AxiosRequestConfig = {
@@ -119,3 +127,4 @@ export const CriarAnuncio = () => {
 
         )
     }
+

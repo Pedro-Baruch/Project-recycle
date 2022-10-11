@@ -1,22 +1,15 @@
-import { Link } from 'react-router-dom'
-import './styles.css'
-
-
+import { Link } from "react-router-dom";
+import "./styles.css";
 
 export const Navigation = () => {
-
-
-    return (
-        <nav className='nav'>
-            <Link className='Link' to='/home/anuncio'>
-                <p>anuncio</p>
-            </Link>
-            <Link className='Link' to='/'>
-                <p>empresa</p>
-            </Link>
-            
-            
-        </nav>
-
-    )
-}
+  return (
+    <nav className="nav">
+      <Link className="Link" to="/home/anuncio">
+        <p>anuncio</p>
+      </Link>
+      <Link className="Link" to="/">
+        <p>empresa</p>
+      </Link>
+    </nav>
+  );
+};

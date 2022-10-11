@@ -1,15 +1,15 @@
-.Card{
-    padding-top: 3rem;
-   
+.Card {
+  padding-top: 3rem;
 }
-ul,li{
-
-list-style-type:none;
-
+ul,
+li {
+  list-style-type: none;
 }
+
 .box-anuncio{
     display: flex;
     justify-content: center;
     padding-bottom:2rem;
     border-radius:2rem;
 }
+

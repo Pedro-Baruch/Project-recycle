@@ -1,3 +1,4 @@
+
 import { Header } from "./Components/Header-Full/Header"
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
 import './assets/App.css'
@@ -18,6 +19,7 @@ function App() {
                 <Footer />
             </Router>
         </main>)
+
 }
 
-export default App
+export default App;

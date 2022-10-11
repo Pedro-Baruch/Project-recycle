@@ -1,5 +1,5 @@
 import React from "react";
-import './styles.css'
+import "./styles.css";
 interface Props {
   children?: React.ReactNode;
   onClick: () => void;
@@ -7,26 +7,19 @@ interface Props {
   width: string;
 }
 
-const Button: React.FC<Props> = ({ 
-    
-    children,
-    onClick,
-    height,
-    width
-    
-    
-  }) => { 
+const Button: React.FC<Props> = ({ children, onClick, height, width }) => {
   return (
-    <button className="Buttons"
+    <button
+      className="Buttons"
       onClick={onClick}
       style={{
         height,
-        width
-     }}
+        width,
+      }}
     >
-    {children}
+      {children}
     </button>
   );
-}
+};
 
 export default Button;
