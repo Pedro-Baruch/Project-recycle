@@ -27,11 +27,14 @@ const Sidebar = ({ active }: ActiveProps) => {
     <Container>
       <FaTimes onClick={closeSidebar} />
       <Content>
-        <Link to={'/home/anuncio'}><SidebarItem Icon={FaHome} Text="Home"></SidebarItem></Link>
+        <Link to={"/home/anuncio"}>
+          <SidebarItem Icon={FaHome} Text="Home"></SidebarItem>
+        </Link>
         <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />
-        <Link to='/create'><SidebarItem Icon={FaRegFileAlt} Text="Anuncios" /></Link>
+        <Link to="/create">
+          <SidebarItem Icon={FaRegFileAlt} Text="Anuncios" />
+        </Link>
         <SidebarItem Icon={FaEnvelope} Text="Notificações" />
-
         <SidebarItem Icon={FaUserAlt} Text="Perfil" />
         <SidebarItem Icon={FaRegSun} Text="Configs" />
       </Content>

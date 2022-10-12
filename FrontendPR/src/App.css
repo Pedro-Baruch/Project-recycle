@@ -1,0 +1,17 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Sen', sans-serif;
+}
+
+.ContainerApp{
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: #272727;
+}

@@ -48,7 +48,7 @@ export const CriarAnuncio = () => {
         <h1>Registre Seu Anuncio</h1>
         <form className="form" onSubmit={handleSubmit}>
           <div className="bloco">
-            <label>Titulo: </label>
+            <label>Titulo </label>
             <input
               className="input"
               type="text"
@@ -62,7 +62,7 @@ export const CriarAnuncio = () => {
           </div>
 
           <div className="bloco">
-            <label>Descrição: </label>
+            <label>Descrição </label>
             <input
               className="input"
               type="text"
@@ -74,7 +74,19 @@ export const CriarAnuncio = () => {
           </div>
 
           <div className="bloco">
-            <label>tags: </label>
+            <label>Valor</label>
+            <input
+              className="input"
+              type="text"
+              name="valor"
+              placeholder="Valor(R$)"
+              value={preços}
+              onChange={(e) => setPreços(e.target.value)}
+            />
+          </div>
+
+          <div className="bloco">
+            <label>Pesquisar tags</label>
             <input
               className="input"
               type="text"
@@ -85,23 +97,14 @@ export const CriarAnuncio = () => {
             />
           </div>
 
-          <div className="bloco">
-            <label>Valor: </label>
-            <input
-              className="input"
-              type="text"
-              name="valor"
-              placeholder="Valor(R$)"
-              value={preços}
-              onChange={(e) => setPreços(e.target.value)}
+          <div className="ButtonCriar">
+            <Button
+              children="Criar anúncio"
+              height="50px"
+              width="120px"
+              onClick={() => console.log("")}
             />
           </div>
-          <Button
-            children="add"
-            height="50px"
-            width="120px"
-            onClick={() => console.log("")}
-          />
         </form>
       </div>
     </main>
