@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { AdController } from "../controllers/adController";
+import { AdController } from "../modules/ads/adController";
 
 const adRoutes = Router()
 
 const adController = new AdController()
 
-adRoutes.post('/create', adController.createAd)
-adRoutes.get('/:id', adController.getAd)
+adRoutes.post('/create', adController.create)
 adRoutes.get('/', adController.getAll)
-adRoutes.delete('/delete', adController.delete)
-adRoutes.patch('/:id/update', adController.update)
+adRoutes.get('/:id', adController.getAd)
+adRoutes.delete('/:id', adController.delete)
+adRoutes.patch('/:id', adController.update)
 
 export { adRoutes };
 
