@@ -7,6 +7,10 @@
   font-family: 'Sen', sans-serif;
 }
 
+li{
+  list-style: none;
+}
+
 .ContainerApp{
   display: flex;
   flex-direction: column;

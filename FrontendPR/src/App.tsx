@@ -1,7 +1,7 @@
 import { Header } from "./Components/Header-Full/Header";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
-import { ExibirAnuncio } from "./pages/Exibir-Anuncios/index";
+import { ExibirAd } from "./pages/Exibir-Anuncios/index";
 import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import Footer from "./Components/Footer";
 
@@ -15,7 +15,7 @@ function App() {
         <div className="ContainerPages">
           <Routes>
             <Route path="/create" element={<CriarAnuncio />} />
-            <Route path="/home/anuncio" element={<ExibirAnuncio />} />
+            <Route path="/home/anuncio" element={<ExibirAd />} />
           </Routes>
         </div>
         <Footer/>

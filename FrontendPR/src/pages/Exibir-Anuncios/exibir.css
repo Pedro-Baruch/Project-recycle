@@ -1,0 +1,59 @@
+.container-ad{
+  margin: 3% 0%;
+}
+
+.container-Informacoes{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  margin: 10px;
+
+  border: solid 3px #8c8c8c;
+  color: white;
+  margin: 0% 15% 0% 15%;
+}
+
+.container-Informacoes li{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.pruduto-tag{
+  background-color: #454546;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 4px;
+}
+
+.foto-produto{
+  margin: 10px 15px 10px 0px;
+  height: 100px;
+  width: 100px;
+  background-color: #8c8c8c;
+}
+
+.usuario-foto{
+  display: flex;
+  flex-direction: row;
+}
+
+.usuario-foto p{
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.foto-perfil{
+  background-color: #8c8c8c;
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+}
+
+.solicitar-denunciar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
