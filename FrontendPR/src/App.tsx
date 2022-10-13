@@ -4,6 +4,7 @@ import "./App.css";
 import { ExibirAd } from "./pages/Exibir-Anuncios/index";
 import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import Footer from "./Components/Footer";
+import { Registro } from "./pages/Registro";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/create" element={<CriarAnuncio />} />
             <Route path="/home/anuncio" element={<ExibirAd />} />
+            <Route path="/registro" element={<Registro/>} />
           </Routes>
         </div>
         <Footer/>

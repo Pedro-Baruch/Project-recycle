@@ -34,13 +34,13 @@ export function ExibirAd() {
             <p>Usuário</p>
           </li>
           <li key={aux.id}>{aux.titulos}</li>
-          <li key={aux.id}>{aux.descrição}</li>
-          <li key={aux.id}>Preços: {aux.preços}</li>
-          <li className="pruduto-tag" key={aux.id}>
+          <li >{aux.descrição}</li>
+          <li >Preços: {aux.preços}</li>
+          <li className="pruduto-tag" >
             {aux.tag}
           </li>
           <li>
-            <img className="foto-produto" />
+            <img className="foto-produto"/>
           </li>
           <li className="solicitar-denunciar">
             <Button children="Solicitar" height="30px" width="100px"onClick={()=>{console.log("click")}} />
