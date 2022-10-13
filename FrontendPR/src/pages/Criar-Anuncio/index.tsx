@@ -9,6 +9,7 @@ interface Post {
   descrição: string;
   preços: number;
   tag: string;
+  image:any;
 }
 
 export const CriarAnuncio = () => {
@@ -17,6 +18,8 @@ export const CriarAnuncio = () => {
   const [preços, setPreços] = useState("");
   const [descrição, setDescrição] = useState("");
   const [tag, setTag] = useState("");
+  const [image, setImage] = useState("");
+
 
   const URL = "http://localhost:3000/posts";
   const config: AxiosRequestConfig = {
@@ -33,7 +36,7 @@ export const CriarAnuncio = () => {
 
     const response = await axios.post<any, AxiosResponse<Post, any>, Post>(
       URL,
-      { titulos, descrição, preços: Number(preços), tag }
+      { titulos, descrição, preços: Number(preços), tag,image }
     );
 
     const aux = response.data;
@@ -94,6 +97,16 @@ export const CriarAnuncio = () => {
               placeholder="#tags"
               value={tag}
               onChange={(e) => setTag(e.target.value)}
+            />
+          </div>
+          <div className="bloco">
+            <label>Enviar Foto</label>
+            <input
+              className=""
+              type="file"
+              name="image"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
             />
           </div>
 

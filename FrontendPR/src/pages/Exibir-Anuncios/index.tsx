@@ -8,6 +8,7 @@ interface Post {
   descrição: string;
   preços: number;
   tag: string;
+  image:any;
 }
 
 export function ExibirAd() {
@@ -42,8 +43,8 @@ export function ExibirAd() {
             <img className="foto-produto" />
           </li>
           <li className="solicitar-denunciar">
-            <Button children="Solicitar" height="30px" width="100px" />
-            <Button children="Denunciar" height="30px" width="100px" />
+            <Button children="Solicitar" height="30px" width="100px"onClick={()=>{console.log("click")}} />
+            <Button children="Denunciar" height="30px" width="100px" onClick={()=>{console.log("click")}}/>
           </li>
         </ul>
       ))}
