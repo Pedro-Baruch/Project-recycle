@@ -1,6 +1,42 @@
+import { hashSync } from "bcrypt"
 import { prisma } from "../../database/prismaClient"
 
-export class AuthService {
+interface ICreateUser{
+    name: string
+    email: string
+    password: string
+}
+
+export class UserService {
+    createUser = async({name, email, password}: ICreateUser) => {
+        const user = await prisma.user.findUnique({
+            where: {email}
+        })
+
+        if(user) {
+            throw new Error("Usuário já possui uma conta")
+        }
+
+        const passwordHash = hashSync(password, 8)
+
+        const newUser = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: passwordHash
+            }
+        })
+
+        if(!newUser) {
+            throw new Error("Erro ao criar usuário")
+        }
+
+        const userProfile = await prisma.userProfile.create({
+            data: {
+                userId: newUser.id
+            }
+        })
+    }
 
     findbyEmail = async(email: string) => {
         const user = await prisma.user.findUnique({
