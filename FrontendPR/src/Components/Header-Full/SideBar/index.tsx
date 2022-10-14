@@ -27,7 +27,7 @@ const Sidebar = ({ active }: ActiveProps) => {
     <Container>
       <FaTimes onClick={closeSidebar} />
       <Content>
-        <Link to={"/home/anuncio"}>
+        <Link to={"/home"}>
           <SidebarItem Icon={FaHome} Text="Home"></SidebarItem>
         </Link>
         <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />

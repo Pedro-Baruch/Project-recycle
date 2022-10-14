@@ -1,10 +1,10 @@
 import { Header } from "./Components/Header-Full/Header";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
-import { ExibirAd } from "./pages/Exibir-Anuncios/index";
 import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import Footer from "./Components/Footer";
 import { Registro } from "./pages/Registro";
+import { Home } from "./pages/Exibir-Anuncios";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <div className="ContainerPages">
           <Routes>
             <Route path="/create" element={<CriarAnuncio />} />
-            <Route path="/home/anuncio" element={<ExibirAd />} />
+            <Route path="/home" element={<Home/>} />
             <Route path="/registro" element={<Registro/>} />
           </Routes>
         </div>
