@@ -10,6 +10,9 @@ export class UserController {
     createUser = async(req:Request, res: Response) => {
         const{name, email, password} = req.body
 
+        //const {url} = req.imgUrl
+        //console.log(url)
+
         await this.userService.createUser({name, email, password})
 
         return res.status(201).send()
