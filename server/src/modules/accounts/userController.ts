@@ -9,11 +9,11 @@ export class UserController {
 
     createUser = async(req:Request, res: Response) => {
         const{name, email, password} = req.body
+        let url: string | undefined
 
-        //const {url} = req.imgUrl
-        //console.log(url)
+        req.imgUrl ? url = req.imgUrl.url: url = undefined
 
-        await this.userService.createUser({name, email, password})
+        await this.userService.createUser({name, email, password, profilePictureUrl: url})
 
         return res.status(201).send()
     }

@@ -4,14 +4,14 @@ import admin from 'firebase-admin';
 
 var serviceAccount = require("../../config/firebase-key.json");
 
-const BUCKET = 'project-recycle-6649d.appspot.com'
+export const BUCKET = 'project-recycle-6649d.appspot.com'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: BUCKET,
 });
 
-const bucket = admin.storage().bucket()
+export const bucket = admin.storage().bucket()
 
 
 export const uploadImg = (req: Request, res: Response, next: NextFunction) => {

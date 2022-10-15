@@ -4,11 +4,12 @@ import { prisma } from "../../database/prismaClient"
 interface ICreateUser{
     name: string
     email: string
+    profilePictureUrl: string | undefined
     password: string
 }
 
 export class UserService {
-    createUser = async({name, email, password}: ICreateUser) => {
+    createUser = async({name, email, password, profilePictureUrl}: ICreateUser) => {
         const user = await prisma.user.findUnique({
             where: {email}
         })
@@ -33,7 +34,9 @@ export class UserService {
 
         const userProfile = await prisma.userProfile.create({
             data: {
-                userId: newUser.id
+                userId: newUser.id,
+                profilePictureUrl
+                
             }
         })
     }
