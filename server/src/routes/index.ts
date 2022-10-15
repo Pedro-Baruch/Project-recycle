@@ -1,10 +1,12 @@
 import { Router } from "express";
-import { adRoutes } from "./adRoutes";
-import { authRouter } from "./authRoutes";
+import { adsRoutes } from "./adsRoutes";
+import { authRoutes } from "./authRoutes";
+import { usersRoutes } from "./usersRouter";
 
 const router = Router()
 
-router.use('/auth', authRouter)
-router.use('/ads', adRoutes)
+router.use('/login', authRoutes)
+router.use('/ads', adsRoutes)
+router.use(usersRoutes)
 
 export default router
