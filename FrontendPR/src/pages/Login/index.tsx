@@ -1,29 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
 
-interface User{
-  name: string
-  email: string
-  password: string
-  token? : string
-}
-
-export const Registro = () => {
-  
-  const [email, setEmail] = useState('')
-  const [name, setNome] = useState('')
-  const [password, setPassword] = useState('')
-
+export const Login = () => {
+ 
   return (
     <div className="Container">
-      <h1>Registro</h1>
+      <h1>Login</h1>
       <form className="form">
-        <div className="bloco">
-          <label>Nome</label>
-          <input className="input" type="text" />
-        </div>
         <div className="bloco">
           <label>Email</label>
           <input className="input" type="text" />

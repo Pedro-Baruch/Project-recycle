@@ -5,6 +5,7 @@ import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import Footer from "./Components/Footer";
 import { Registro } from "./pages/Registro";
 import { Home } from "./pages/Exibir-Anuncios";
+import { Login } from "./pages/Login";
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
         </header>
         <div className="ContainerPages">
           <Routes>
-            <Route path="/create" element={<CriarAnuncio />} />
-            <Route path="/home" element={<Home/>} />
             <Route path="/" element={<Registro/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/home" element={<Home/>} />
+            <Route path="/create" element={<CriarAnuncio />} />
           </Routes>
         </div>
         <Footer/>
