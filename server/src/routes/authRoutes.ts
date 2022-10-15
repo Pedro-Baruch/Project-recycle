@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { AuthController } from "../controllers/authController";
+import { AuthController } from "../modules/accounts/authController";
 
-const authRouter = Router()
-const authController = new AuthController()
+const authRoutes = Router()
+const userController = new AuthController()
 
-authRouter.post('/singup', authController.singup)
+authRoutes.post('/', userController.login)
 
-export { authRouter }
+export { authRoutes };
+
