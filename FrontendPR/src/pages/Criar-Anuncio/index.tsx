@@ -3,24 +3,20 @@ import { FormEvent, useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import "./create.css";
 
-interface Post {
+interface Ad {
   id?: number;
-  titulos: string;
-  descrição: string;
-  preços: number;
-  tag: string;
-  image: any;
+  title: string;
+  description: string;
+  price: number;
 }
 
 export const CriarAnuncio = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [titulos, setTitulos] = useState("");
-  const [preços, setPreços] = useState("");
-  const [descrição, setDescrição] = useState("");
-  const [tag, setTag] = useState("");
-  const [image, setImage] = useState("");
+  const [posts, setPosts] = useState<Ad[]>([]);
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
-  const URL = "http://localhost:3000/posts";
+  const URL = "http://localhost:3000/ads";
   const config: AxiosRequestConfig = {
     headers: {
       Accept: "application/json",
@@ -29,13 +25,10 @@ export const CriarAnuncio = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(
-      `Submeteu... Name: ${titulos}, Valor: R$ ${preços} ${tag}${descrição}`
-    );
 
-    const response = await axios.post<any, AxiosResponse<Post, any>, Post>(
+    const response = await axios.post<any, AxiosResponse<Ad, any>, Ad>(
       URL,
-      { titulos, descrição, preços: Number(preços), tag, image }
+      { title, description, price: Number(price) }
     );
 
     const aux = response.data;
@@ -56,9 +49,9 @@ export const CriarAnuncio = () => {
               type="text"
               name="titulo"
               placeholder="Titulo"
-              value={titulos}
+              value={title}
               onChange={(e) => {
-                setTitulos(e.target.value);
+                setTitle(e.target.value);
               }}
             />
           </div>
@@ -69,8 +62,8 @@ export const CriarAnuncio = () => {
               type="text"
               name="descrição"
               placeholder="Descrição"
-              value={descrição}
-              onChange={(e) => setDescrição(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="bloco">
@@ -80,8 +73,8 @@ export const CriarAnuncio = () => {
               type="text"
               name="valor"
               placeholder="Valor(R$)"
-              value={preços}
-              onChange={(e) => setPreços(e.target.value)}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <div className="bloco">
@@ -91,8 +84,8 @@ export const CriarAnuncio = () => {
               type="text"
               name="tags"
               placeholder="#tags"
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
+              value={""}
+              onChange={(e) => {}}
             />
           </div>
           <div className="bloco">
@@ -101,8 +94,8 @@ export const CriarAnuncio = () => {
               className=""
               type="file"
               name="image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={""}
+              onChange={(e) => {}}
             />
           </div>
           <div className="ButtonCriar">

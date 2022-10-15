@@ -36,7 +36,6 @@ export class UserService {
             data: {
                 userId: newUser.id,
                 profilePictureUrl
-                
             }
         })
     }
@@ -66,6 +65,7 @@ export class UserService {
             }
         })
 
+        
         if(!user) {
             throw new Error("Usuário não encontrado!")
         }
