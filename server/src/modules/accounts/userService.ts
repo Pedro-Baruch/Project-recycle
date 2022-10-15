@@ -1,5 +1,6 @@
 import { hashSync } from "bcrypt"
 import { prisma } from "../../database/prismaClient"
+import { AppError } from "../../Errors/AppError"
 
 interface ICreateUser{
     name: string
@@ -15,7 +16,7 @@ export class UserService {
         })
 
         if(user) {
-            throw new Error("Usuário já possui uma conta")
+            throw new AppError("Usuário já possui uma conta")
         }
 
         const passwordHash = hashSync(password, 8)
@@ -29,7 +30,7 @@ export class UserService {
         })
 
         if(!newUser) {
-            throw new Error("Erro ao criar usuário")
+            throw new AppError("Erro ao criar usuário")
         }
 
         const userProfile = await prisma.userProfile.create({
@@ -47,7 +48,7 @@ export class UserService {
         })
 
         if(!user) {
-            throw new Error("Usuário não encontrado!")
+            throw new AppError("Usuário não encontrado!", 404)
         }
 
         return user
@@ -67,7 +68,7 @@ export class UserService {
         })
 
         if(!user) {
-            throw new Error("Usuário não encontrado!")
+            throw new AppError("Usuário não encontrado!", 404)
         }
 
         return user

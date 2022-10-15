@@ -2,10 +2,13 @@ import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import jwtSecret from '../../config/jwtSecret'
 import { prisma } from "../../database/prismaClient"
+import { AppError } from '../../Errors/AppError'
 
 interface IResponse{
     user: {
         email: string
+        name: string
+        profilePictureUrl: string | null | undefined
     }
 
     token: string
@@ -18,22 +21,24 @@ export class AuthService {
             select: {
                 email: true,
                 password: true, 
+                name: true,
                 userProfile: {
                     select: {
-                        id: true
+                        id: true,
+                        profilePictureUrl: true
                     }
                 }
             }
         })
 
         if(!user) {
-            throw new Error("Email ou senha incorretos!")
+            throw new AppError("Email ou senha incorretos!")
         }
 
         const passwordMatch = await compare(password, user.password)
 
         if(!passwordMatch) {
-            throw new Error("Email ou senha incorretos!")
+            throw new AppError("Email ou senha incorretos!")
         }
 
         const token = sign({userProfileId: user.userProfile?.id, email: user.email}, 
@@ -46,8 +51,9 @@ export class AuthService {
 
         const tokenReturn: IResponse = {
             user: {
-                email: user.email
-
+                email: user.email,
+                name: user.name,
+                profilePictureUrl: user.userProfile?.profilePictureUrl
             },
             token
         }

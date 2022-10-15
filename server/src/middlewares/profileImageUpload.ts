@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { BUCKET, bucket } from "../database/Firebase/firebase"
 
-export const profileImageUpload = async(req: Request, res: Response, next: NextFunction) => {
+export const profileImageUpload = (req: Request, res: Response, next: NextFunction) => {
     if(!req.file) {
         return next()
     }
