@@ -9,7 +9,7 @@ interface Post {
   descrição: string;
   preços: number;
   tag: string;
-  image:any;
+  image: any;
 }
 
 export const CriarAnuncio = () => {
@@ -19,7 +19,6 @@ export const CriarAnuncio = () => {
   const [descrição, setDescrição] = useState("");
   const [tag, setTag] = useState("");
   const [image, setImage] = useState("");
-
 
   const URL = "http://localhost:3000/posts";
   const config: AxiosRequestConfig = {
@@ -36,7 +35,7 @@ export const CriarAnuncio = () => {
 
     const response = await axios.post<any, AxiosResponse<Post, any>, Post>(
       URL,
-      { titulos, descrição, preços: Number(preços), tag,image }
+      { titulos, descrição, preços: Number(preços), tag, image }
     );
 
     const aux = response.data;
@@ -63,7 +62,6 @@ export const CriarAnuncio = () => {
               }}
             />
           </div>
-
           <div className="bloco">
             <label>Descrição </label>
             <input
@@ -75,7 +73,6 @@ export const CriarAnuncio = () => {
               onChange={(e) => setDescrição(e.target.value)}
             />
           </div>
-
           <div className="bloco">
             <label>Valor</label>
             <input
@@ -87,7 +84,6 @@ export const CriarAnuncio = () => {
               onChange={(e) => setPreços(e.target.value)}
             />
           </div>
-
           <div className="bloco">
             <label>Pesquisar tags</label>
             <input
@@ -109,7 +105,6 @@ export const CriarAnuncio = () => {
               onChange={(e) => setImage(e.target.value)}
             />
           </div>
-
           <div className="ButtonCriar">
             <Button
               children="Criar anúncio"

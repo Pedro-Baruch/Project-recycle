@@ -8,7 +8,7 @@ interface Ad {
   descrição: string;
   preços: number;
   tag: string;
-  image:any;
+  image: any;
 }
 
 export function ExibirAd() {
