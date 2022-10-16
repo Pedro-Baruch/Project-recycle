@@ -6,6 +6,7 @@ import Footer from "./Components/Footer";
 import { Registro } from "./pages/Registro";
 import { Home } from "./pages/Exibir-Anuncios";
 import { Login } from "./pages/Login";
+import { ExibirEM } from './Components/GetEmpresa/index';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/" element={<Registro />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
-            {/* <Route path="/home/empresa" element={</>}/> */}
+             <Route path="/home/empresa" element={<ExibirEM/>}/> 
 
             <Route path="/create" element={<CriarAnuncio />} />
           </Routes>

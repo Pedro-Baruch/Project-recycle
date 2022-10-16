@@ -5,7 +5,7 @@ export const Home = () => {
   return(
     <div>
       <Navigation/>
-      <ExibirAd/>
+      <ExibirAd/>     
     </div>
   )
 }
