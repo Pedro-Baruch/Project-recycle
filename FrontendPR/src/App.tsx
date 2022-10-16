@@ -16,13 +16,15 @@ function App() {
         </header>
         <div className="ContainerPages">
           <Routes>
-            <Route path="/" element={<Registro/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/home" element={<Home/>} />
+            <Route path="/" element={<Registro />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            {/* <Route path="/home/empresa" element={</>}/> */}
+
             <Route path="/create" element={<CriarAnuncio />} />
           </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </Router>
     </main>
   );

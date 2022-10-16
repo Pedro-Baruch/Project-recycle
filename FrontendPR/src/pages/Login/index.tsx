@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
 
@@ -49,6 +50,7 @@ export const Login = () => {
           />
         </div>
         <div className="ButtonCriar">
+          <Link to={'/home'}>
           <Button
             children="Registrar"
             height="30px"
@@ -56,7 +58,8 @@ export const Login = () => {
             onClick={() => {
               console.log("click");
             }}
-          />
+            />
+            </Link>
         </div>
       </form>
     </div>
