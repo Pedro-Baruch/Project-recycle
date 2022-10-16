@@ -27,6 +27,7 @@ export const CriarAnuncio = () => {
 
   const config = {
     headers: {
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
   };
@@ -35,11 +36,11 @@ export const CriarAnuncio = () => {
     event.preventDefault();
 
     axios
-      .post(
+      .post<any, AxiosResponse<Ad, any>, Ad>(
         URL,
         {
           title,
-          price,
+          price: Number(price),
           description,
         },
         config
