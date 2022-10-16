@@ -1,21 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
 
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  token?: string;
-}
-
 export const Registro = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [name, setNome] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
+  const handleSubmit = async(event: FormEvent) => {
+    event.preventDefault();
+    
     const URL = "http://localhost:3000";
 
     axios
@@ -26,22 +21,40 @@ export const Registro = () => {
       })
       .then()
       .catch();
-  });
+  };
   return (
     <div className="Container">
       <h1>Registro</h1>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="bloco">
           <label>Nome</label>
-          <input className="input" type="text" />
+          <input
+            className="input"
+            type="text"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
         </div>
         <div className="bloco">
           <label>Email</label>
-          <input className="input" type="text" />
+          <input
+            className="input"
+            type="text"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
         </div>
         <div className="bloco">
           <label>Senha</label>
-          <input className="input" type="text" />
+          <input
+            className="input"
+            type="text"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </div>
         <div className="ButtonCriar">
           <Button

@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { response } from "express";
 import { FormEvent, useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import "./create.css";
@@ -11,30 +12,40 @@ interface Ad {
 }
 
 export const CriarAnuncio = () => {
-  const [posts, setPosts] = useState<Ad[]>([]);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
-  const URL = "http://localhost:3000/ads";
-  const config: AxiosRequestConfig = {
+  const URL = "http://localhost:3000/ads/create";
+
+  let token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyUHJvZmlsZUlkIjoiY2Y4Y2NmNTUtZjQ2Zi00ZmVhLTljOTctMzM3NjgwYjFkMWM2IiwiZW1haWwiOiJwZWRyb0Bob3RtYWlsLmNvbSIsImlhdCI6MTY2NTg3NDg5MywiZXhwIjoxNjc2Njc0ODkzLCJzdWIiOiJjZjhjY2Y1NS1mNDZmLTRmZWEtOWM5Ny0zMzc2ODBiMWQxYzYifQ.e1dSAEBSED9GsnQ6NMjJYqzuoSfZ4b6w6Jr6qSBBuqU";
+
+  const bodyParameters = {
+    token: "value",
+  };
+
+  const config = {
     headers: {
-      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     },
   };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    const response = await axios.post<any, AxiosResponse<Ad, any>, Ad>(
-      URL,
-      { title, description, price: Number(price) }
-    );
-
-    const aux = response.data;
-    posts.push(aux);
-    setPosts([...posts, aux]);
-    alert("Carro cadastrado!");
+    axios
+      .post(
+        URL,
+        {
+          title,
+          price,
+          description,
+        },
+        config
+      )
+      .then((response) => {})
+      .catch();
   };
 
   return (
