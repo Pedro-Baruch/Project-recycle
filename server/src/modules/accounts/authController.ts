@@ -4,7 +4,7 @@ import { AuthService } from "./authService";
 export class AuthController {
     private authService
     constructor() {
-        this.authService = new AuthService
+        this.authService = new AuthService()
     }
 
     login = async(req: Request, res: Response) => {

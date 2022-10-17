@@ -9,7 +9,7 @@ export class AdController {
 
     create = async (req: Request, res: Response) => {
         const {title, description, price} = req.body
-        const{id} = req.user
+        const{profileId: id} = req.user
 
         await this.adService.createAd({title, description, price, userId: id})
 

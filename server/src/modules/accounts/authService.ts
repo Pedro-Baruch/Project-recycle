@@ -20,6 +20,7 @@ export class AuthService {
             where: {email},
             select: {
                 email: true,
+                id: true,
                 password: true, 
                 name: true,
                 userProfile: {
@@ -41,7 +42,7 @@ export class AuthService {
             throw new AppError("Email ou senha incorretos!")
         }
 
-        const token = sign({userProfileId: user.userProfile?.id, email: user.email}, 
+        const token = sign({userId: user.id, userProfileId: user.userProfile?.id, email: user.email}, 
             jwtSecret.jwt_access_secret, 
             {
                 subject: user.userProfile?.id,
