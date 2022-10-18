@@ -50,7 +50,7 @@ export function ExibirAd() {
      .then(resp => resp.data)
   }
 
-  
+
   return (
     <div className="container-ad">
       {ad.map((aux) => (
@@ -61,7 +61,7 @@ export function ExibirAd() {
           </li>
           <li key={aux.id}>{aux.title}</li>
           <li>{aux.description}</li>
-          <li>Preços: {aux.price}</li>
+          <li>Preço: R${aux.price}</li>
           <li className="pruduto-tag">tag</li>
           <li>
             <img className="foto-produto" />

@@ -8,6 +8,7 @@ export function Update() {
     
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
     
 
     
@@ -22,6 +23,7 @@ export function Update() {
     function sendDataToAPI  ()  {
           axios.put(`http://localhost:3000/posts/${finalIndex}`, {
               title,
+              description,
               price
           })
       }
@@ -36,14 +38,23 @@ export function Update() {
                     <input name="fname"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder='First Name' />
+                        placeholder='titulo' />
+                </Form.Field>
+                <Form.Field>
+                    <label>Last Name</label>
+                    <input
+                        name="lname"
+                        value={description}
+                        placeholder='descrição'
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
                 </Form.Field>
                 <Form.Field>
                     <label>Last Name</label>
                     <input
                         name="lname"
                         value={price}
-                        placeholder='Last Name'
+                        placeholder='preço'
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </Form.Field>
