@@ -2,13 +2,16 @@ import "../GetAnuncios/exibir.css";
 import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-interface Ad {
-  id?: number;
-  title: string;
-  description: string;
-  price: string;
-}
+
+
+  interface Ad {
+    id?: number;
+    title: string;
+    description: string;
+    price: string;
+  }
 
 export function ExibirAd() {
   const [ad, setAd] = useState<Ad[]>([]);
@@ -21,6 +24,7 @@ export function ExibirAd() {
     token: "value",
   };
 
+  
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,7 +32,7 @@ export function ExibirAd() {
   };
 
   useEffect(() => {
-    const URL = "http://localhost:3000/ads";
+    const URL = "http://localhost:3000/posts";
 
     axios
       .get(URL, config)
@@ -36,8 +40,17 @@ export function ExibirAd() {
         setAd(response.data);
       })
       .catch();
-  }, []);
+  }, [ad]);
 
+ 
+
+  const handleDeleteTask = async (id?:number) => {
+    axios
+     .delete(`http://localhost:3000/posts/${id}`)
+     .then(resp => resp.data)
+  }
+
+  
   return (
     <div className="container-ad">
       {ad.map((aux) => (
@@ -54,21 +67,22 @@ export function ExibirAd() {
             <img className="foto-produto" />
           </li>
           <li className="solicitar-denunciar">
+
+            <Link to={`/edit/${aux.id}`}>
             <Button
-              children="Solicitar"
+              children="Update"
               height="30px"
               width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={() => console.log('')
+            }
             />
+            </Link>
+            
             <Button
-              children="Denunciar"
+              children="Delete"
               height="30px"
               width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={()=> handleDeleteTask(aux.id)}
             />
           </li>
         </ul>

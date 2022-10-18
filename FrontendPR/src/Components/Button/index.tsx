@@ -3,7 +3,7 @@ import "./styles.css";
 
 interface Props {
   children?: React.ReactNode;
-  onClick: () => void;
+  onClick: () => any;
   height: string;
   width: string;
 }
