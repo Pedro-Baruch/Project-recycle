@@ -5,8 +5,8 @@ import { prisma } from "../database/prismaClient"
 import { AppError } from "../Errors/AppError"
 
 interface IPayload {
-    profile_id: string
-    user_id: string
+    sub: string
+    userId: string
 }
 
 export async function authenticated(req:Request, res: Response, next: NextFunction) {
@@ -19,8 +19,7 @@ export async function authenticated(req:Request, res: Response, next: NextFuncti
     const [, token] = authHeader.split(" ")
 
     try {
-        const {profile_id: userProfileId, user_id: userId} = verify(token, jwtSecret.jwt_access_secret) as IPayload
-        
+        const {sub: userProfileId, userId} = verify(token, jwtSecret.jwt_access_secret) as IPayload
         
         const user = prisma.userProfile.findUnique({
             where: {id: userProfileId}
