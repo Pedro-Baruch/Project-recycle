@@ -1,26 +1,16 @@
 {
   "posts": [
     {
-
-      "titulos": "quero comprar latinhas",
-      "descrição": "nhame nhame quero latinhas deliciosas",
-      "preços": 130,
-      "tag": "#latinhas ",
-      "id": 9
+      "title": "jossuel",
+      "description": "uma boa pessoa",
+      "price": "123",
+      "id": 2
     },
     {
-      "titulos": "quero comprar latinhas",
-      "descrição": "nhame nhame quero latinhas deliciosas",
-      "preços": 130,
-      "tag": "#latinhas ",
-      "id": 10
-    },
-    {
-      "titulos": "Bom Dia",
-      "descrição": "Quero vender garrafas de plastico que coletei",
-      "preços": 120,
-      "tag": "#plastico  #garrafas",
-      "id": 11
+      "title": "Bom Dia",
+      "price": 130,
+      "description": "asdfasdf",
+      "id": 3
     }
   ]
 }

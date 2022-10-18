@@ -1,36 +1,31 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #171923;
-  position: fixed;
+  background-color: black;
   height: 100%;
-  top: 0px;
-  left: 0px;
-  width: 300px;
+  position: fixed;
+  width: auto;
   animation: showSidebar .4s;
   
   > svg {
-    position: fixed;
-    color: blue;
-    width: 30px;
-    height: 30px;
-    margin-top: 32px;
-    margin-left: 32px;
-    cursor: pointer;
-    
+    margin : 30px 10px;
+    height: 20px;
+    width: 20px;
   }
+
   @keyframes showSidebar {
     from {
       opacity: 0;
-      width: 0;
+      width: 0px;
     }
     to {
       opacity: 1;
-      width: 300px;
+      width: auto;
     }
   }
 `;
 
 export const Content = styled.div`
-  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
 `;

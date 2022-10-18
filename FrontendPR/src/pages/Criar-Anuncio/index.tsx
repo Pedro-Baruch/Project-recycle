@@ -1,45 +1,52 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { response } from "express";
 import { FormEvent, useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import "./create.css";
 
-interface Post {
+interface Ad {
   id?: number;
-  titulos: string;
-  descrição: string;
-  preços: number;
-  tag: string;
+  title: string;
+  description: string;
+  price: number;
 }
 
 export const CriarAnuncio = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [titulos, setTitulos] = useState("");
-  const [preços, setPreços] = useState("");
-  const [descrição, setDescrição] = useState("");
-  const [tag, setTag] = useState("");
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
-  const URL = "http://localhost:3000/posts";
-  const config: AxiosRequestConfig = {
+  const URL = "http://localhost:3000/posts";{/*ads/create*/}
+
+  let token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyUHJvZmlsZUlkIjoiY2Y4Y2NmNTUtZjQ2Zi00ZmVhLTljOTctMzM3NjgwYjFkMWM2IiwiZW1haWwiOiJwZWRyb0Bob3RtYWlsLmNvbSIsImlhdCI6MTY2NTg3NDg5MywiZXhwIjoxNjc2Njc0ODkzLCJzdWIiOiJjZjhjY2Y1NS1mNDZmLTRmZWEtOWM5Ny0zMzc2ODBiMWQxYzYifQ.e1dSAEBSED9GsnQ6NMjJYqzuoSfZ4b6w6Jr6qSBBuqU";
+
+  const bodyParameters = {
+    token: "value",
+  };
+
+  const config = {
     headers: {
       Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     },
   };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(
-      `Submeteu... Name: ${titulos}, Valor: R$ ${preços} ${tag}${descrição}`
-    );
 
-    const response = await axios.post<any, AxiosResponse<Post, any>, Post>(
-      URL,
-      { titulos, descrição, preços: Number(preços), tag }
-    );
-
-    const aux = response.data;
-    posts.push(aux);
-    setPosts([...posts, aux]);
-    alert("Carro cadastrado!");
+    axios
+      .post<any, AxiosResponse<Ad, any>, Ad>(
+        URL,
+        {
+          title,
+          price: Number(price),
+          description,
+        },
+        config
+      )
+      .then((response) => {})
+      .catch();
   };
 
   return (
@@ -48,60 +55,69 @@ export const CriarAnuncio = () => {
         <h1>Registre Seu Anuncio</h1>
         <form className="form" onSubmit={handleSubmit}>
           <div className="bloco">
-            <label>Titulo: </label>
+            <label>Titulo </label>
             <input
               className="input"
               type="text"
               name="titulo"
               placeholder="Titulo"
-              value={titulos}
+              value={title}
               onChange={(e) => {
-                setTitulos(e.target.value);
+                setTitle(e.target.value);
               }}
             />
           </div>
-
           <div className="bloco">
-            <label>Descrição: </label>
+            <label>Descrição </label>
             <input
               className="input"
               type="text"
               name="descrição"
               placeholder="Descrição"
-              value={descrição}
-              onChange={(e) => setDescrição(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-
           <div className="bloco">
-            <label>tags: </label>
-            <input
-              className="input"
-              type="text"
-              name="tags"
-              placeholder="#tags"
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
-            />
-          </div>
-
-          <div className="bloco">
-            <label>Valor: </label>
+            <label>Valor</label>
             <input
               className="input"
               type="text"
               name="valor"
               placeholder="Valor(R$)"
-              value={preços}
-              onChange={(e) => setPreços(e.target.value)}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
-          <Button
-            children="add"
-            height="50px"
-            width="120px"
-            onClick={() => console.log("")}
-          />
+          <div className="bloco">
+            <label>Pesquisar tags</label>
+            <input
+              className="input"
+              type="text"
+              name="tags"
+              placeholder="#tags"
+              value={""}
+              onChange={(e) => {}}
+            />
+          </div>
+          <div className="bloco">
+            <label>Enviar Foto</label>
+            <input
+              className=""
+              type="file"
+              name="image"
+              value={""}
+              onChange={(e) => {}}
+            />
+          </div>
+          <div className="ButtonCriar">
+            <Button
+              children="Criar anúncio"
+              height="50px"
+              width="120px"
+              onClick={() => console.log("")}
+            />
+          </div>
         </form>
       </div>
     </main>
