@@ -9,6 +9,6 @@ const router = Router()
 router.use('/login', authRoutes)
 router.use('/ads', adsRoutes)
 router.use(usersRoutes)
-router.use('companies', companiesRoutes)
+router.use('/companies', companiesRoutes)
 
 export default router

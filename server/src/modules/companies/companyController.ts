@@ -15,4 +15,27 @@ export class CompanyController {
 
         return res.status(201).send()
     }
+
+    getAllCompanies = async(req: Request, res: Response) => {
+        const companies = await this.companyService.getAllCompanies()
+
+        return res.status(200).json(companies)
+    }
+
+    getCompany = async(req: Request, res: Response) => {
+        const { id } = req.params
+        console.log(id)
+        const company = await this.companyService.getCompany(id)
+
+        return res.status(200).json(company)
+    }
+
+    updateCompanyPhoto = async(req: Request, res: Response) => {
+        const {id} = req.params
+        const {url} = req.imgUrl
+
+        const companyProfile = await this.companyService.updateCompanyPhoto(id, url)
+
+        return res.status(200).json(companyProfile)
+    }
 }

@@ -43,4 +43,40 @@ export class CompanyService {
 
         return companyProfile
     }
+
+    getAllCompanies = async() => {
+        const companies = await prisma.companyProfile.findMany()
+
+        return companies
+    }
+
+    getCompany = async(id: string) => {
+        const company = await prisma.companyProfile.findUnique({
+            where: {
+                id
+            },
+            include: {
+                company: true
+            }
+        })
+
+        if(!company) {
+            throw new AppError("Empresa não encontrada") 
+        }
+
+        return company
+    }
+
+    updateCompanyPhoto = async(profileId: string, imgUrl: string) => {
+        const company = await this.getCompany(profileId)
+
+        const updatedProfile = await prisma.companyProfile.update({
+            where: {id: company.id},
+            data: {
+                profilePictureUrl: imgUrl
+            }
+        })
+
+        return updatedProfile 
+    }
 }
