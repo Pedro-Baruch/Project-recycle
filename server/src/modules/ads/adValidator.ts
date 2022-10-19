@@ -10,8 +10,8 @@ export const adRegistrationValidator = {
       'string.empty': `O campo description não pode ser vazio!`
     }),
 
-    price: Joi.string().required().messages({
-      'string.empty': `O campo price não pode ser vazio!`
+    price: Joi.number().required().messages({
+      'number.empty': `O campo price não pode ser vazio!`
     }),
   })
 }
