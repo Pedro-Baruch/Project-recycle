@@ -1,5 +1,5 @@
 import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import jwtSecret from '../../config/jwtSecret'
 import { prisma } from "../../database/prismaClient"
 import { AppError } from '../../Errors/AppError'
@@ -12,6 +12,10 @@ interface IResponse{
     }
 
     token: string
+}
+
+interface IPayload {
+  email: string
 }
 
 export class AuthService {
@@ -62,4 +66,23 @@ export class AuthService {
         return tokenReturn
     }
 
+    confirmEmail = async(token: string) => {
+      const {email} = verify(token, jwtSecret.jwt_access_secret) as IPayload
+
+      const user = await prisma.user.findUnique({
+        where: {email}
+      })
+
+      if(!user) {
+        throw new AppError('Erro')
+      }
+
+      await prisma.user.update({
+        where: {id: user.id},
+        data: {
+          activated: true,
+          confirmationToken: null
+        }
+      })
+    }
 }

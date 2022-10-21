@@ -4,7 +4,8 @@ import { AuthController } from "../modules/accounts/authController";
 const authRoutes = Router()
 const userController = new AuthController()
 
-authRoutes.post('/', userController.login)
+authRoutes.post('/login', userController.login)
+authRoutes.patch('/email-confirmation/:token', userController.confirmEmail)
 
 export { authRoutes };
 

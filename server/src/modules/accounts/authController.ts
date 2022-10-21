@@ -14,4 +14,13 @@ export class AuthController {
 
         return res.status(200).json(token)
     }
+
+    
+  confirmEmail = async(req: Request, res: Response) => {
+    const {token} = req.params
+
+    await this.authService.confirmEmail(token)
+
+    return res.status(200).json({message: 'Email confirmado com sucesso!'})
+  }
 }
