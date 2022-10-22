@@ -1,8 +1,8 @@
 {
   "posts": [
     {
-      "title": "jossuel",
-      "description": "uma boa pessoa",
+      "title": "edit",
+      "description": "edit",
       "price": "123",
       "id": 2
     },
@@ -11,6 +11,12 @@
       "price": 130,
       "description": "asdfasdf",
       "id": 3
+    },
+    {
+      "title": "teste",
+      "price": 130,
+      "description": "teste",
+      "id": 4
     }
   ]
 }
