@@ -7,7 +7,10 @@ import "../../pages/Criar-Anuncio/create.css";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+
+  let setToken = (token: string) => {
+    localStorage.setItem("authToken", token);
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -50,16 +53,16 @@ export const Login = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={'/home'}>
-          <Button
-            children="Registrar"
-            height="30px"
-            width="100px"
-            onClick={() => {
-              console.log("click");
-            }}
+          <Link to={"/home"}>
+            <Button
+              children="Login"
+              height="30px"
+              width="100px"
+              onClick={() => {
+                console.log("click");
+              }}
             />
-            </Link>
+          </Link>
         </div>
       </form>
     </div>
