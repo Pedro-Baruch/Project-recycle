@@ -3,19 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: #1A202C; 
+  background-color: black; 
   font-size: 20px;
   color: white;
-  padding: 10px;
+  padding-top: 20px;
+  padding-right: 10px;
   cursor: pointer;
-  border-radius: 10px;
-  margin: 0 15px 20px;
   
   > svg {
-    margin: 0 20px;
+    margin: 0 10px;
   }
+  
   &:hover {
-    background-color: black;
-    
+    background-color: #8C8C8C;
   }
 `;

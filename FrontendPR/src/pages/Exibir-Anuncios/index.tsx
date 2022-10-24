@@ -1,12 +1,11 @@
-import "./show.css";
-import { PostFetchPage } from "../ShowPosts";
+import { ExibirAd } from "../../Components/GetAnuncios"
+import { Navigation } from "../../Components/Nav"
 
-export const ExibirAnuncio = () => {
-  return (
-    <main>
-      <div className="Container">
-        <PostFetchPage />
-      </div>
-    </main>
-  );
-};
+export const Home = () => {
+  return(
+    <div>
+      <Navigation/>
+      <ExibirAd/>     
+    </div>
+  )
+}

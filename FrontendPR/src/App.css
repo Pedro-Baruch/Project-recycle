@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Sen', sans-serif;
+  
+}
+
+li{
+  list-style: none;
+}
+
+.ContainerApp{
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: #272727;
+}

@@ -1,3 +1,4 @@
+import { AppError } from '../../Errors/AppError'
 import { prisma } from './../../database/prismaClient'
 
 interface ICreateAd {
@@ -35,7 +36,7 @@ export class AdService {
         })
 
         if(!ad) {
-            throw new Error("Anúncio não encontrado!")
+            throw new AppError("Anúncio não encontrado!", 404)
         }
 
         return ad
@@ -45,7 +46,7 @@ export class AdService {
         const ad = await this.getAd(adId)
 
         if(!(title && description)) {
-            throw new Error("Título e descrição não podem ser nulos")
+            throw new AppError("Título e descrição não podem ser nulos")
         }
 
         const updatedAd = await prisma.ad.update({
