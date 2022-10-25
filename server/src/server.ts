@@ -1,5 +1,7 @@
 import cors from 'cors'
 import express, { Request, Response } from 'express'
+import 'express-async-errors'
+import { erroMiddleware } from './middlewares/errorMiddleware'
 import router from './routes'
 
 const app = express()
@@ -12,5 +14,7 @@ app.get('/', (req: Request, res: Response)=>{
 })
 
 app.use(router)
+
+app.use(erroMiddleware)
 
 app.listen(3000, () => console.log("Servidor rodando!"))
