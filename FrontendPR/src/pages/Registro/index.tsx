@@ -25,7 +25,7 @@ export const Registro = () => {
 
       alert('Conta registrada!')
     } catch (err) {
-      alert('Erro ao criar ao criar usuário!')
+      alert('Erro ao criar o usuário!')
     }
 
   };
