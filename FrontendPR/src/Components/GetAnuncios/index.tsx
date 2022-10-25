@@ -57,12 +57,13 @@ export function ExibirAd() {
             <img className="foto-produto" />
           </li>
           <li className="solicitar-denunciar">
+
             <Link to={`/edit/${aux.id}`}>
               <Button
                 children="Update"
                 height="30px"
                 width="100px"
-                onClick={() => console.log("")}
+                
               />
             </Link>
 
@@ -70,7 +71,7 @@ export function ExibirAd() {
               children="Delete"
               height="30px"
               width="100px"
-              onClick={() => handleDeleteTask(aux.id)}
+              onClick={()=>{handleDeleteTask(aux.id)}}
             />
           </li>
         </ul>
