@@ -58,9 +58,6 @@ export const Login = () => {
               children="Login"
               height="30px"
               width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
             />
           </Link>
         </div>

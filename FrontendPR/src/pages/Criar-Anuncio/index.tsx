@@ -1,6 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { response } from "express";
-import { FormEvent, useEffect, useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import { FormEvent, useState } from "react";
 import Button from "../../Components/Button";
 import "./create.css";
 
@@ -115,7 +114,6 @@ export const CriarAnuncio = () => {
               children="Criar anúncio"
               height="50px"
               width="120px"
-              onClick={() => console.log("")}
             />
           </div>
         </form>
