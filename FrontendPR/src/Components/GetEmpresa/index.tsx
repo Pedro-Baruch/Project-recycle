@@ -2,82 +2,82 @@ import "../GetAnuncios/exibir.css";
 import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { Navigation } from "../Nav";
 
-interface Ad {
-    id?: number;
-    title: string;
-    description: string;
-    price: string;
+interface EmP {
+  id?: number;
+  cnpj: string;
+  nome: string;
+  localização: string;
+  horario: string;
+  tipolixo: string;
+  description: string;
 }
 
 export function ExibirEM() {
-    const [ad, setAd] = useState<Ad[]>([]);
+  const [ad, setAd] = useState<EmP[]>([]);
 
-    let token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyUHJvZmlsZUlkIjoiY2Y4Y2NmNTUtZjQ2Zi00ZmVhLTljOTctMzM3NjgwYjFkMWM2IiwiZW1haWwiOiJwZWRyb0Bob3RtYWlsLmNvbSIsImlhdCI6MTY2NTg3NDg5MywiZXhwIjoxNjc2Njc0ODkzLCJzdWIiOiJjZjhjY2Y1NS1mNDZmLTRmZWEtOWM5Ny0zMzc2ODBiMWQxYzYifQ.e1dSAEBSED9GsnQ6NMjJYqzuoSfZ4b6w6Jr6qSBBuqU";
+  let token = localStorage.getItem("authToken");
 
+  const bodyParameters = {
+    token: "value",
+  };
 
-    const bodyParameters = {
-        token: "value",
-    };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    };
+  useEffect(() => {
+    const URL = "http://localhost:3000/empresa";
 
-    useEffect(() => {
-        const URL = "http://localhost:3000/ads";
+    axios
+      .get(URL, config)
+      .then((response) => {
+        setAd(response.data);
+      })
+      .catch();
+  }, [ad]);
 
-        axios
-            .get(URL, config)
-            .then((response) => {
-                setAd(response.data);
-            })
-            .catch();
-    }, []);
+  const handleDeleteTask = async (id?: number) => {
+    axios.delete(`http://localhost:3000/empresa/${id}`).then((resp) => resp.data);
+  };
 
-    return (
-        <div className="">   {/* Criar div no empresa pra poder colar o navigation*/}
+  return (
+    <div>
 
-                <Navigation />
-            <div className="container-ad">
-                {/* {ad.map((aux) => ( */}
+        <Navigation />
+      <div className="container-ad">
+        {ad.map((aux) => (
+          <ul className="container-Informacoes">
+            <li className="usuario-foto">
+              <img className="foto-perfil" />
+              <p>Usuário</p>
+            </li>
+            <li key={aux.id}>
+              CNPJ : {aux.cnpj}</li>
+            <li>Nome : {aux.nome}</li>
+            <li>Localização : {aux.localização}</li>
+            <li>Hora Funcionamento : {aux.horario}</li>
+            <li>Material de Trabalho : {aux.tipolixo}</li>
+            <li>Descrição : {aux.description}</li>
 
-                <ul className="container-Informacoes">
-                    <li className="usuario-foto">
-                        <img className="foto-perfil" />
-                        <p>Empresa</p>
-                    </li>
-                    <li >ReciclarOficial</li>
-
-                    <li className="pruduto-tag">tag</li>
-                    <li>
-                        <img className="foto-produto" />
-                    </li>
-                    <li className="solicitar-denunciar">
-                        <Button
-                            children="Solicitar"
-                            height="30px"
-                            width="100px"
-                            onClick={() => {
-                                console.log("click");
-                            }}
-                        />
-                        <Button
-                            children="Denunciar"
-                            height="30px"
-                            width="100px"
-                            onClick={() => {
-                                console.log("click");
-                            }}
-                        />
-                    </li>
-                </ul>
-                {/*     ))}  */}
-            </div>
-        </div>
-    );
+            <li>
+              <img className="foto-produto" />
+            </li>
+            <li className="solicitar-denunciar">
+              <Button
+                children="Delete"
+                height="30px"
+                width="100px"
+                onClick={() => { handleDeleteTask(aux.id) }}
+              />
+            </li>
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
 }

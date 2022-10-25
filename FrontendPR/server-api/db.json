@@ -1,9 +1,9 @@
 {
   "posts": [
     {
-      "title": "edit",
-      "description": "edit",
-      "price": "123",
+      "title": "Bom Dia Anuncio",
+      "price": 130,
+      "description": "asdfasdf",
       "id": 2
     },
     {
@@ -11,12 +11,26 @@
       "price": 130,
       "description": "asdfasdf",
       "id": 3
+    }
+  ],
+  "empresa": [
+    {
+      "cnpj": "666-432000",
+      "nome": "jossuel  rocha mendes",
+      "localização": "tancredo Neves",
+      "horario": "7:00 as 20:00",
+      "tipolixo": "plastico em geral",
+      "description": "asdfasdf",
+      "id": 5
     },
     {
-      "title": "teste",
-      "price": 130,
-      "description": "teste",
-      "id": 4
+      "cnpj": "666-432000",
+      "nome": "jossuel  rocha mendes",
+      "localização": "tancredo Neves",
+      "horario": "7:00 as 20:00",
+      "tipolixo": "plastico em geral",
+      "description": "empresa no mercado a 15 anos buscando reciclar materias para limpar as ruas",
+      "id": 6
     }
   ]
 }

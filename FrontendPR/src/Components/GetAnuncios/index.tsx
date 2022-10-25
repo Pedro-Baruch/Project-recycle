@@ -1,14 +1,16 @@
 import "../GetAnuncios/exibir.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from 'react';
 import Button from "../../Components/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 
 interface Ad {
   id?: number;
   title: string;
   description: string;
   price: string;
+  
 }
 
 export function ExibirAd() {
@@ -38,7 +40,7 @@ export function ExibirAd() {
   }, [ad]);
 
   const handleDeleteTask = async (id?: number) => {
-    axios.delete(`http://localhost:3000/posts/${id}`).then((resp) => resp.data);
+    axios.delete(`http://localhost:3000/ads/${id}`).then((resp) => resp.data);
   };
 
   return (
@@ -71,7 +73,8 @@ export function ExibirAd() {
               children="Delete"
               height="30px"
               width="100px"
-              onClick={()=>{handleDeleteTask(aux.id)}}
+              onClick={()=> {handleDeleteTask(aux.id)}}
+              
             />
           </li>
         </ul>

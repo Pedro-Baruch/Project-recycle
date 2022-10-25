@@ -5,19 +5,20 @@ interface Props {
   children?: React.ReactNode;
   height: string;
   width: string;
-  onClick?:any;
+  onClick?:() => void;
 }
 
-const Button: React.FC<Props> = ({ children, height, width }) => {
+const Button: React.FC<Props> = ({ children, height, width,onClick }) => {
   return (
     <button
       className="Buttons"
+      onClick={onClick}
       style={{
         height,
         width,
         
       }}
-      onClick={()=>{}}
+      
     >
       {children}
     </button>

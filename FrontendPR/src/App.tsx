@@ -8,6 +8,7 @@ import { Home } from "./pages/Exibir-Anuncios";
 import { Login } from "./pages/Login";
 import { ExibirEM } from './Components/GetEmpresa/index';
 import { Update } from './pages/UpdatePosts/index';
+import { CriarEmpresa } from './pages/Criar-Empresa/index';
 
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
             <Route path="/" element={<Registro />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
-             <Route path="/home/empresa" element={<ExibirEM/>}/> 
+            <Route path="/home/empresa" element={<ExibirEM/>}/> 
             <Route path="/create" element={<CriarAnuncio />} />
+            <Route path="/create/empresa" element={<CriarEmpresa />} />
             <Route path="/edit/:id" element={<Update />} />
           </Routes>
         </div>
