@@ -1,6 +1,5 @@
 import axios from "axios";
-import { FormEvent, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { FormEvent, useState } from "react";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
 
@@ -17,14 +16,18 @@ export const Registro = () => {
 
     const URL = "http://localhost:3000";
 
-    axios
-      .post(URL, {
+    try {
+      axios.post(URL, {
         name: name,
         email: email,
         password: password,
       })
-      .then()
-      .catch();
+
+      alert('Conta registrada!')
+    } catch (err) {
+      alert('Erro ao criar ao criar usuário!')
+    }
+
   };
   return (
     <div className="Container">
@@ -61,16 +64,12 @@ export const Registro = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={'/login'}>
             <Button
               children="Registrar"
               height="30px"
               width="100px"
-              onClick={() => {
-                alert('Conta registrada');
-              }}
             />
-          </Link>
+
         </div>
       </form>
     </div>

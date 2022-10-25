@@ -3,16 +3,14 @@ import "./styles.css";
 
 interface Props {
   children?: React.ReactNode;
-  onClick: () => any;
   height: string;
   width: string;
 }
 
-const Button: React.FC<Props> = ({ children, onClick, height, width }) => {
+const Button: React.FC<Props> = ({ children, height, width }) => {
   return (
     <button
       className="Buttons"
-      onClick={onClick}
       style={{
         height,
         width,
