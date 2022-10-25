@@ -20,17 +20,17 @@
       "localização": "tancredo Neves",
       "horario": "7:00 as 20:00",
       "tipolixo": "plastico em geral",
-      "description": "asdfasdf",
-      "id": 5
-    },
-    {
-      "cnpj": "666-432000",
-      "nome": "jossuel  rocha mendes",
-      "localização": "tancredo Neves",
-      "horario": "7:00 as 20:00",
-      "tipolixo": "plastico em geral",
       "description": "empresa no mercado a 15 anos buscando reciclar materias para limpar as ruas",
       "id": 6
+    },
+    {
+      "cnpj": "655-400123",
+      "nome": "ReciclePi",
+      "localização": "Av higinio Cunha",
+      "horario": "07 as 18h",
+      "tipolixo": "Reciclaveis em Geral",
+      "description": "Empresa Renomada  com 15 anos de experiencia no mercado especializada em artigos reciclaveis",
+      "id": 8
     }
   ]
 }

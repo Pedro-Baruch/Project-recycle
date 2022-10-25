@@ -23,7 +23,7 @@ export const CriarEmpresa = () => {
   const [tipolixo, setTipoLixo] = useState("");
   const [description, setDescription] = useState("");
 
-  const URL = "http://localhost:3000/empresa";{/*ads/create*/}
+  const URL = "http://localhost:5000/empresa";{/*ads/create*/}
 
   let token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyUHJvZmlsZUlkIjoiY2Y4Y2NmNTUtZjQ2Zi00ZmVhLTljOTctMzM3NjgwYjFkMWM2IiwiZW1haWwiOiJwZWRyb0Bob3RtYWlsLmNvbSIsImlhdCI6MTY2NTg3NDg5MywiZXhwIjoxNjc2Njc0ODkzLCJzdWIiOiJjZjhjY2Y1NS1mNDZmLTRmZWEtOWM5Ny0zMzc2ODBiMWQxYzYifQ.e1dSAEBSED9GsnQ6NMjJYqzuoSfZ4b6w6Jr6qSBBuqU";
@@ -72,6 +72,7 @@ export const CriarEmpresa = () => {
               name="CNPJ"
               placeholder="CNPJ"
               value={cnpj}
+              autoComplete="off"
               onChange={(e) => {
                 setCnpj(e.target.value);
               }}
@@ -86,6 +87,7 @@ export const CriarEmpresa = () => {
               placeholder="nome"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
+              autoComplete="off"
             />
           </div>
           <div className="bloco">
@@ -96,6 +98,7 @@ export const CriarEmpresa = () => {
               name="localização"
               placeholder="localização"
               value={localização}
+              autoComplete="off"
               onChange={(e) => setLocalização(e.target.value)}
             />
           </div>
@@ -107,6 +110,7 @@ export const CriarEmpresa = () => {
               name="horario"
               placeholder="horario"
               value={horario}
+              autoComplete="off"
               onChange={(e) => setHorario(e.target.value)}
             />
           </div>
@@ -117,6 +121,7 @@ export const CriarEmpresa = () => {
               type="text"
               name="tipolixo"
               value={tipolixo}
+              autoComplete="off"
               onChange={(e) => setTipoLixo(e.target.value)}
             />
           </div>
@@ -127,6 +132,7 @@ export const CriarEmpresa = () => {
               type="text"
               name="descrição"
               value={description}
+              autoComplete="off"
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>

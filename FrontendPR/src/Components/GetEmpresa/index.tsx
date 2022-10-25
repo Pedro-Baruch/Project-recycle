@@ -31,7 +31,7 @@ export function ExibirEM() {
   };
 
   useEffect(() => {
-    const URL = "http://localhost:3000/empresa";
+    const URL = "http://localhost:5000/empresa";
 
     axios
       .get(URL, config)
@@ -42,13 +42,13 @@ export function ExibirEM() {
   }, [ad]);
 
   const handleDeleteTask = async (id?: number) => {
-    axios.delete(`http://localhost:3000/empresa/${id}`).then((resp) => resp.data);
+    axios.delete(`http://localhost:5000/empresa/${id}`).then((resp) => resp.data);
   };
 
   return (
     <div>
 
-        <Navigation />
+      <Navigation />
       <div className="container-ad">
         {ad.map((aux) => (
           <ul className="container-Informacoes">

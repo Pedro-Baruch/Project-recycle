@@ -61,6 +61,7 @@ export const CriarAnuncio = () => {
               name="titulo"
               placeholder="Titulo"
               value={title}
+              autoComplete="off"
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -74,6 +75,7 @@ export const CriarAnuncio = () => {
               name="descrição"
               placeholder="Descrição"
               value={description}
+              autoComplete="off"
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -85,6 +87,7 @@ export const CriarAnuncio = () => {
               name="valor"
               placeholder="Valor(R$)"
               value={price}
+              autoComplete="off"
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
@@ -96,6 +99,7 @@ export const CriarAnuncio = () => {
               name="tags"
               placeholder="#tags"
               value={""}
+              autoComplete="off"
               onChange={(e) => {}}
             />
           </div>
@@ -106,6 +110,7 @@ export const CriarAnuncio = () => {
               type="file"
               name="image"
               value={""}
+              autoComplete="off"
               onChange={(e) => {}}
             />
           </div>
