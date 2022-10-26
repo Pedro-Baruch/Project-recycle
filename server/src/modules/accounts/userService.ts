@@ -5,26 +5,26 @@ import { prisma } from "../../database/prismaClient"
 import { AppError } from "../../Errors/AppError"
 import { SendEmail } from "../../util/nodemailer"
 
-interface ICreateUser{
-    name: string
-    email: string
-    profilePictureUrl: string | undefined
-    password: string
+interface ICreateUser {
+  name: string
+  email: string
+  profilePictureUrl: string | undefined
+  password: string
 }
 
 export class UserService {
-  createUser = async({name, email, password, profilePictureUrl}: ICreateUser) => {
+  createUser = async ({ name, email, password, profilePictureUrl }: ICreateUser) => {
     const user = await prisma.user.findUnique({
-        where: {email}
+      where: { email }
     })
 
-    if(user) {
-        throw new AppError("Usuário já possui uma conta")
+    if (user) {
+      throw new AppError("Usuário já possui uma conta")
     }
 
     const passwordHash = hashSync(password, 8)
 
-    const token = sign({email: email}, jwtSecret.jwt_access_secret, {
+    const token = sign({ email: email }, jwtSecret.jwt_access_secret, {
       expiresIn: jwtSecret.expires_in_token
     })
 
@@ -37,7 +37,7 @@ export class UserService {
       }
     })
 
-    if(!newUser) {
+    if (!newUser) {
       throw new AppError("Erro ao criar usuário")
     }
 
@@ -52,36 +52,36 @@ export class UserService {
     })
   }
 
-  findbyEmail = async(email: string) => {
-      const user = await prisma.user.findUnique({
-        where: {email}
-      })
+  findbyEmail = async (email: string) => {
+    const user = await prisma.user.findUnique({
+      where: { email }
+    })
 
-      if(!user) {
-        throw new AppError("Usuário não encontrado!", 404)
-      }
+    if (!user) {
+      throw new AppError("Usuário não encontrado!", 404)
+    }
 
-      return user
+    return user
   }
 
-  findById = async(id: string) => {
-      const user = await prisma.user.findUnique({
-        where: {id},
-        select: {
-          id: true,
-          userProfile: {
-            select: {
-              id: true
-            }
+  findById = async (id: string) => {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        userProfile: {
+          select: {
+            id: true
           }
         }
-      })
-
-      
-      if(!user) {
-        throw new AppError("Usuário não encontrado!", 404)
       }
+    })
 
-      return user
+
+    if (!user) {
+      throw new AppError("Usuário não encontrado!", 404)
+    }
+
+    return user
   }
 }

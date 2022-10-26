@@ -4,9 +4,9 @@ import "./App.css";
 import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import Footer from "./Components/Footer";
 import { Registro } from "./pages/Registro";
-import { Home } from "./pages/Exibir-Anuncios";
+import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
-import { ExibirEM } from "./Components/GetEmpresa/index";
+
 
 function App() {
   return (
@@ -20,7 +20,6 @@ function App() {
             <Route path="/" element={<Registro />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/home/company" element={<ExibirEM />} />
             <Route path="/create/ad" element={<CriarAnuncio />} />
             <Route path="/create/company" element={<CriarAnuncio />} />
           </Routes>
