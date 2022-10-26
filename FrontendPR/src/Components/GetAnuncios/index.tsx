@@ -1,8 +1,8 @@
 import "../GetAnuncios/exibir.css";
 import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { api } from "../../hooks/axiosApi";
+import { config } from "../../hooks/helperApi";
 
 interface Ad {
   id?: number;
@@ -14,32 +14,11 @@ interface Ad {
 export function ExibirAd() {
   const [ad, setAd] = useState<Ad[]>([]);
 
-  let token = localStorage.getItem("authToken");
-
-  const bodyParameters = {
-    token: "value",
-  };
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
   useEffect(() => {
-    const URL = "http://localhost:3000/ads";
-
-    axios
-      .get(URL, config)
-      .then((response) => {
-        setAd(response.data);
-      })
-      .catch();
-  }, [ad]);
-
-  const handleDeleteTask = async (id?: number) => {
-    axios.delete(`http://localhost:3000/posts/${id}`).then((resp) => resp.data);
-  };
+    api.get("/ads", config).then((response) => {
+      setAd(response.data);
+    });
+  }, []);
 
   return (
     <div className="container-ad">
@@ -57,20 +36,21 @@ export function ExibirAd() {
             <img className="foto-produto" />
           </li>
           <li className="solicitar-denunciar">
-            <Link to={`/edit/${aux.id}`}>
-              <Button
-                children="Update"
-                height="30px"
-                width="100px"
-                onClick={() => console.log("")}
-              />
-            </Link>
-
             <Button
-              children="Delete"
+              children="Solicitar"
               height="30px"
               width="100px"
-              onClick={() => handleDeleteTask(aux.id)}
+              onClick={() => {
+                console.log("click");
+              }}
+            />
+            <Button
+              children="Denunciar"
+              height="30px"
+              width="100px"
+              onClick={() => {
+                console.log("click");
+              }}
             />
           </li>
         </ul>

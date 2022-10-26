@@ -9,6 +9,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
 
   let setToken = (token: string) => {
+    localStorage.removeItem("authToken")
     localStorage.setItem("authToken", token);
   };
 
