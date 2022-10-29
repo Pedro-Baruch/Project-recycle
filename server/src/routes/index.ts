@@ -4,11 +4,11 @@ import { authRoutes } from "./authRoutes";
 import { companiesRoutes } from "./companiesRoutes";
 import { usersRoutes } from "./usersRouter";
 
-const router = Router()
+const router = Router();
 
-router.use(authRoutes)
-router.use('/ads', adsRoutes)
-router.use(usersRoutes)
-router.use('/companies', companiesRoutes)
+router.use(authRoutes);
+router.use("/ads", adsRoutes);
+router.use(usersRoutes);
+router.use("/companies", companiesRoutes);
 
-export default router
+export default router;
