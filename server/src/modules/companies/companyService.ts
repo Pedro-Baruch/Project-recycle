@@ -5,10 +5,37 @@ interface ICreateCompany {
   name: string;
   cnpj: string;
   userId: string;
+  openingHours: string;
+  localization: string;
+  description: string;
+  profilePictureUrl: string | undefined;
 }
 
 export class CompanyService {
-  createCompany = async ({ name, cnpj, userId }: ICreateCompany) => {
+  createCompany = async ({
+    name,
+    cnpj,
+    userId,
+    openingHours,
+    localization,
+    description,
+    profilePictureUrl,
+  }: ICreateCompany) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        companyProfile: {
+          select: { id: true },
+        },
+      },
+    });
+
+    if (user?.companyProfile?.id) {
+      throw new AppError("Usuário já possui uma empresa cadastrada!");
+    }
+
     const company = await prisma.company.findUnique({
       where: { cnpj },
     });
@@ -29,6 +56,9 @@ export class CompanyService {
       data: {
         name,
         cnpj,
+        description,
+        localization,
+        openingHours,
       },
     });
 
@@ -36,6 +66,7 @@ export class CompanyService {
       data: {
         userId,
         companyId: newCompany.id,
+        profilePictureUrl,
       },
     });
 
@@ -43,7 +74,9 @@ export class CompanyService {
   };
 
   getAllCompanies = async () => {
-    const companies = await prisma.companyProfile.findMany();
+    const companies = await prisma.companyProfile.findMany({
+      include: { company: true },
+    });
 
     return companies;
   };

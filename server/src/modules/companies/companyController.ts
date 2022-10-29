@@ -8,10 +8,22 @@ export class CompanyController {
   }
 
   createCompany = async (req: Request, res: Response) => {
-    const { name, cnpj } = req.body;
+    const { name, cnpj, localization, description, openingHours } = req.body;
     const { userId } = req.user;
 
-    await this.companyService.createCompany({ name, cnpj, userId });
+    let url: string | undefined;
+
+    req.imgUrl ? (url = req.imgUrl.url) : (url = undefined);
+
+    await this.companyService.createCompany({
+      name,
+      cnpj,
+      userId,
+      localization,
+      description,
+      openingHours,
+      profilePictureUrl: url,
+    });
 
     return res.status(201).send();
   };
@@ -30,11 +42,11 @@ export class CompanyController {
   };
 
   updateCompanyPhoto = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { profileId } = req.company;
     const { url } = req.imgUrl;
 
     const companyProfile = await this.companyService.updateCompanyPhoto(
-      id,
+      profileId,
       url
     );
 

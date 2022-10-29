@@ -11,21 +11,24 @@ export async function companyProfileMiddleware(
 
   const user = await prisma.user.findUnique({
     where: { id: userId },
-    include: {
-      companyProfile: true,
+    select: {
+      companyProfile: {
+        select: {
+          companyId: true,
+          id: true,
+        },
+      },
     },
   });
 
-  if (!user) {
+  if (!user?.companyProfile) {
     throw new AppError("Usuário não tem empresa cadastrada!");
   }
 
-  if (user.companyProfile) {
-    req.company = {
-      profileId: user.companyProfile.id,
-      companyId: user.companyProfile.companyId,
-    };
-  }
+  req.company = {
+    profileId: user.companyProfile.id,
+    companyId: user.companyProfile.companyId,
+  };
 
   next();
 }
