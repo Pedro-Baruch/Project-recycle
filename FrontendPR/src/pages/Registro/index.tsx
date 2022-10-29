@@ -9,9 +9,6 @@ export const Registro = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
@@ -61,13 +58,13 @@ export const Registro = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={'/login'}>
+          <Link to={"/login"}>
             <Button
               children="Registrar"
               height="30px"
               width="100px"
               onClick={() => {
-                alert('Conta registrada');
+                alert("Conta registrada");
               }}
             />
           </Link>

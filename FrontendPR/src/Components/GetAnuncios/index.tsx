@@ -40,17 +40,13 @@ export function ExibirAd() {
               children="Solicitar"
               height="30px"
               width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={() => {}}
             />
             <Button
               children="Denunciar"
               height="30px"
               width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={() => {}}
             />
           </li>
         </ul>

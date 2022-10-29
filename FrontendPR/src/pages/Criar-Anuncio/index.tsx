@@ -8,12 +8,12 @@ export const CriarAnuncio = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
-  const api = adApi()
+  const api = adApi();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    await api.postAd(title,price,description)
+    await api.postAd(title, price, description);
   };
 
   return (
@@ -82,7 +82,7 @@ export const CriarAnuncio = () => {
               children="Criar anúncio"
               height="50px"
               width="120px"
-              onClick={() => console.log("")}
+              onClick={() => {}}
             />
           </div>
         </form>
