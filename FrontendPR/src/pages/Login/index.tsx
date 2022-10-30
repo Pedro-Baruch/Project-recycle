@@ -11,12 +11,15 @@ export const Login = () => {
   let setToken = (token: string) => {
     localStorage.removeItem("authToken")
     localStorage.setItem("authToken", token);
+    
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const URL = "http://localhost:3000/login";
+
+    
 
     axios
       .post(URL, {

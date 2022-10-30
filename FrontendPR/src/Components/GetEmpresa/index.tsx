@@ -4,19 +4,23 @@ import Button from "../../Components/Button";
 import { api } from "../../hooks/axiosApi";
 import { config } from "../../hooks/helperApi";
 
-interface CompaniesProfile{
-  id: string
-  profile: string
+interface Company {
+  company: {
+    id?: string;
+    CNPJ: string;
+    name: string;
+    localization: string;
+    openingHours: string;
+    description: string;
+  };
 }
-
 export function ExibirCompanies() {
-  const [profile, setProfile] = useState<CompaniesProfile[]>([])
+  const [profile, setProfile] = useState<Company[]>([]);
 
   useEffect(() => {
     api.get("/companies", config).then((response) => {
       setProfile(response.data);
     });
-    
   }, []);
 
   return (
@@ -25,8 +29,12 @@ export function ExibirCompanies() {
         <ul className="container-Informacoes">
           <li className="usuario-foto">
             <img className="foto-perfil" />
-            <p>{aux.id}</p>
+            <p>{aux.company.name}</p>
           </li>
+          <li>{aux.company.CNPJ}</li>
+          <li>{aux.company.localization}</li>
+          <li>{aux.company.openingHours}</li>
+          <li>{aux.company.description}</li>
           <li>
             <img className="foto-produto" />
           </li>

@@ -1,19 +1,40 @@
 import { FormEvent, useState } from "react";
 import Button from "../../Components/Button";
-import { adApi } from "../../hooks/axiosApi";
+import { api } from "../../hooks/axiosApi";
+import { config } from "../../hooks/helperApi";
 import "./create.css";
+import { useNavigate } from "react-router-dom";
+import { response } from 'express';
+import { AxiosResponse } from 'axios';
+
+interface Ad{
+  id?: number
+  title: string
+  price: string
+  description: string
+}
 
 export const CriarAnuncio = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
-  const api = adApi();
+  const navigate = useNavigate()
 
   const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-
-    await api.postAd(title, price, description);
+    event.preventDefault()
+    
+    api.post<any, AxiosResponse<Ad, any>, Ad>(
+      "/ads/create",
+      {
+        title,
+        price,
+        description,
+      },
+      config
+    ).then((response) => {
+      navigate("/home")
+    });
   };
 
   return (
@@ -29,9 +50,7 @@ export const CriarAnuncio = () => {
               name="titulo"
               placeholder="Titulo"
               value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="bloco">
@@ -63,8 +82,6 @@ export const CriarAnuncio = () => {
               type="text"
               name="tags"
               placeholder="#tags"
-              value={""}
-              onChange={(e) => {}}
             />
           </div>
           <div className="bloco">
@@ -73,8 +90,6 @@ export const CriarAnuncio = () => {
               className=""
               type="file"
               name="image"
-              value={""}
-              onChange={(e) => {}}
             />
           </div>
           <div className="ButtonCriar">
@@ -82,7 +97,7 @@ export const CriarAnuncio = () => {
               children="Criar anúncio"
               height="50px"
               width="120px"
-              onClick={() => {}}
+              onClick={() => {console.log("a")}}
             />
           </div>
         </form>

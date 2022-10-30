@@ -8,6 +8,7 @@ export const Home = () => {
       <Navigation/>
       <ExibirAd/>
       <ExibirCompanies/>
+      <h6>{localStorage.getItem("authToken")}</h6>
     </div>
   )
 }
