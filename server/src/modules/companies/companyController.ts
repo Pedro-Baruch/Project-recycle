@@ -1,40 +1,55 @@
-import { Request, Response } from "express"
-import { CompanyService } from "./companyService"
+import { Request, Response } from "express";
+import { CompanyService } from "./companyService";
 
 export class CompanyController {
-    private companyService
-    constructor() {
-        this.companyService = new CompanyService()
-    }
+  private companyService;
+  constructor() {
+    this.companyService = new CompanyService();
+  }
 
-    createCompany = async(req:Request, res: Response) => {
-        const{name, cnpj} = req.body
-        const {userId} = req.user
+  createCompany = async (req: Request, res: Response) => {
+    const { name, cnpj, localization, description, openingHours } = req.body;
+    const { userId } = req.user;
 
-        await this.companyService.createCompany({name, cnpj, userId})
+    let url: string | undefined;
 
-        return res.status(201).send()
-    }
+    req.imgUrl ? (url = req.imgUrl.url) : (url = undefined);
 
-    getAllCompanies = async(req: Request, res: Response) => {
-        const companies = await this.companyService.getAllCompanies()
+    await this.companyService.createCompany({
+      name,
+      cnpj,
+      userId,
+      localization,
+      description,
+      openingHours,
+      profilePictureUrl: url,
+    });
 
-        return res.status(200).json(companies)
-    }
+    return res.status(201).send();
+  };
 
-    getCompany = async(req: Request, res: Response) => {
-        const { id } = req.params
-        const company = await this.companyService.getCompany(id)
+  getAllCompanies = async (req: Request, res: Response) => {
+    const companies = await this.companyService.getAllCompanies();
 
-        return res.status(200).json(company)
-    }
+    return res.status(200).json(companies);
+  };
 
-    updateCompanyPhoto = async(req: Request, res: Response) => {
-        const {id} = req.params
-        const {url} = req.imgUrl
+  getCompany = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const company = await this.companyService.getCompany(id);
 
-        const companyProfile = await this.companyService.updateCompanyPhoto(id, url)
+    return res.status(200).json(company);
+  };
 
-        return res.status(200).json(companyProfile)
-    }
+  updateCompanyPhoto = async (req: Request, res: Response) => {
+    const { profileId } = req.company;
+    const { url } = req.imgUrl;
+
+    const companyProfile = await this.companyService.updateCompanyPhoto(
+      profileId,
+      url
+    );
+
+    return res.status(200).json(companyProfile);
+  };
 }

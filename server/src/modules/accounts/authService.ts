@@ -1,21 +1,21 @@
-import { compare } from 'bcrypt'
-import { sign, verify } from 'jsonwebtoken'
-import jwtSecret from '../../config/jwtSecret'
-import { prisma } from "../../database/prismaClient"
-import { AppError } from '../../Errors/AppError'
+import { compare } from "bcrypt";
+import { sign, verify } from "jsonwebtoken";
+import jwtSecret from "../../config/jwtSecret";
+import { prisma } from "../../database/prismaClient";
+import { AppError } from "../../Errors/AppError";
 
 interface IResponse {
   user: {
-    email: string
-    name: string
-    profilePictureUrl: string | null | undefined
-  }
+    email: string;
+    name: string;
+    profilePictureUrl: string | null | undefined;
+  };
 
-  token: string
+  token: string;
 }
 
 interface IPayload {
-  email: string
+  email: string;
 }
 
 export class AuthService {
@@ -30,59 +30,64 @@ export class AuthService {
         userProfile: {
           select: {
             id: true,
-            profilePictureUrl: true
-          }
-        }
-      }
-    })
+            profilePictureUrl: true,
+          },
+        },
+      },
+    });
 
     if (!user) {
-      throw new AppError("Email ou senha incorretos!")
+      throw new AppError("Email ou senha incorretos!");
     }
 
-    const passwordMatch = await compare(password, user.password)
+    const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError("Email ou senha incorretos!")
+      throw new AppError("Email ou senha incorretos!");
     }
 
-    const token = sign({ userId: user.id, userProfileId: user.userProfile?.id, email: user.email },
+    const token = sign(
+      {
+        userId: user.id,
+        userProfileId: user.userProfile?.id,
+        email: user.email,
+      },
       jwtSecret.jwt_access_secret,
       {
         subject: user.userProfile?.id,
-        expiresIn: jwtSecret.expires_in_token
+        expiresIn: jwtSecret.expires_in_token,
       }
-    )
+    );
 
     const tokenReturn: IResponse = {
       user: {
         email: user.email,
         name: user.name,
-        profilePictureUrl: user.userProfile?.profilePictureUrl
+        profilePictureUrl: user.userProfile?.profilePictureUrl,
       },
-      token
-    }
+      token,
+    };
 
-    return tokenReturn
-  }
+    return tokenReturn;
+  };
 
   confirmEmail = async (token: string) => {
-    const { email } = verify(token, jwtSecret.jwt_access_secret) as IPayload
+    const { email } = verify(token, jwtSecret.jwt_access_secret) as IPayload;
 
     const user = await prisma.user.findUnique({
-      where: { email }
-    })
+      where: { email },
+    });
 
     if (!user) {
-      throw new AppError('Erro')
+      throw new AppError("Erro");
     }
 
     await prisma.user.update({
       where: { id: user.id },
       data: {
         activated: true,
-        confirmationToken: null
-      }
-    })
-  }
+        confirmationToken: null,
+      },
+    });
+  };
 }

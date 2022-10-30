@@ -54,9 +54,12 @@ model UserProfile {
 }
 
 model Company {
-  id   String @id @default(uuid())
-  name String @unique()
-  cnpj String @unique()
+  id           String @id @default(uuid())
+  name         String @unique()
+  cnpj         String @unique()
+  openingHours String
+  localization String
+  description  String
 
   companyProfile CompanyProfile?
 }

@@ -3,12 +3,12 @@ import "./styles.css";
 
 interface Props {
   children?: React.ReactNode;
-  onClick: () => any;
   height: string;
   width: string;
+  onClick?:() => void;
 }
 
-const Button: React.FC<Props> = ({ children, onClick, height, width }) => {
+const Button: React.FC<Props> = ({ children, height, width,onClick }) => {
   return (
     <button
       className="Buttons"
@@ -16,7 +16,9 @@ const Button: React.FC<Props> = ({ children, onClick, height, width }) => {
       style={{
         height,
         width,
+        
       }}
+      
     >
       {children}
     </button>
