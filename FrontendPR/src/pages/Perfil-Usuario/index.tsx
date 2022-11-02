@@ -32,13 +32,11 @@ export function PerfilUsuario() {
             children="Avaliar"
             height="30px"
             width="100px"
-            onClick={() => {}}
           />
           <Button
             children="Denunciar"
             height="30px"
             width="100px"
-            onClick={() => {}}
           />
         </li>
       </ul>

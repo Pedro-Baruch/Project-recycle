@@ -58,16 +58,16 @@ export const Registro = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={"/login"}>
-            <Button
-              children="Registrar"
-              height="30px"
-              width="100px"
-              onClick={() => {
-                alert("Conta registrada");
-              }}
-            />
-          </Link>
+
+          <Button
+            children="Registrar"
+            height="30px"
+            width="100px"
+            onClick={() => {
+              alert("Conta registrada");
+            }}
+          />
+
         </div>
       </form>
     </div>

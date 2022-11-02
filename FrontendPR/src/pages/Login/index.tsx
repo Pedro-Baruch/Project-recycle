@@ -11,7 +11,7 @@ export const Login = () => {
   let setToken = (token: string) => {
     localStorage.removeItem("authToken")
     localStorage.setItem("authToken", token);
-    
+
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -19,7 +19,7 @@ export const Login = () => {
 
     const URL = "http://localhost:3000/login";
 
-    
+
 
     axios
       .post(URL, {
@@ -57,13 +57,11 @@ export const Login = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={"/home"}>
-            <Button
-              children="Login"
-              height="30px"
-              width="100px"
-            />
-          </Link>
+          <Button
+            children="Login"
+            height="30px"
+            width="100px"
+          />
         </div>
       </form>
     </div>

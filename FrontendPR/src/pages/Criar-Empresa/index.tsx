@@ -25,7 +25,7 @@ export function CriarEmpresa() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    
+
     api
       .post<any, AxiosResponse<Company, any>, Company>(
         "/companies/create",
@@ -38,7 +38,7 @@ export function CriarEmpresa() {
         },
         config
       )
-      .then((response) => {});
+      .then((response) => { });
   };
 
   return (
@@ -104,7 +104,6 @@ export function CriarEmpresa() {
             children="Criar empresa"
             height="50px"
             width="120px"
-            onClick={() => {}}
           />
         </div>
       </form>
