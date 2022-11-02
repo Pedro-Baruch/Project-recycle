@@ -7,7 +7,7 @@ export const Navigation = () => {
       <Link className="Link" to="/home">
         <p>anuncio</p>
       </Link>
-      <Link className="Link" to="/home/empresa">
+      <Link className="Link" to="">
         <p>empresa</p>
       </Link>
     </nav>

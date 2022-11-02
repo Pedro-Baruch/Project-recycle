@@ -44,7 +44,7 @@ export function ExibirCompanies() {
               height="30px"
               width="100px"
               onClick={() => {
-                console.log("click");
+                
               }}
             />
             <Button
@@ -52,7 +52,7 @@ export function ExibirCompanies() {
               height="30px"
               width="100px"
               onClick={() => {
-                console.log("click");
+                
               }}
             />
           </li>

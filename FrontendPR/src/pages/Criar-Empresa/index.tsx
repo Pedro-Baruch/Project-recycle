@@ -5,10 +5,11 @@ import { api } from "../../hooks/axiosApi";
 import { config } from "../../hooks/helperApi";
 import { response } from "express";
 import { AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Company {
   id?: string;
-  CNPJ: string;
+  cnpj: string;
   name: string;
   localization: string;
   openingHours: string;
@@ -17,11 +18,13 @@ interface Company {
 }
 
 export function CriarEmpresa() {
-  const [CNPJ, setCNPJ] = useState("");
+  const [cnpj, setCNPJ] = useState("");
   const [name, setName] = useState("");
   const [localization, setLocalization] = useState("");
   const [openingHours, setOpeningHours] = useState("");
   const [description, setDescription] = useState("");
+
+const navigate = useNavigate()
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -30,7 +33,7 @@ export function CriarEmpresa() {
       .post<any, AxiosResponse<Company, any>, Company>(
         "/companies/create",
         {
-          CNPJ,
+          cnpj: cnpj,
           name,
           localization,
           openingHours,
@@ -38,7 +41,7 @@ export function CriarEmpresa() {
         },
         config
       )
-      .then((response) => { });
+      .then((response) => { navigate("/home") });
   };
 
   return (
@@ -51,7 +54,7 @@ export function CriarEmpresa() {
             className="input"
             type="text"
             name="CNPJ"
-            value={CNPJ}
+            value={cnpj}
             onChange={(e) => setCNPJ(e.target.value)}
           />
         </div>

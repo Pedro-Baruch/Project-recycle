@@ -3,12 +3,15 @@ import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
+import { useNavigate } from "react-router-dom";
 
 export const Registro = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
+  
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
@@ -20,7 +23,9 @@ export const Registro = () => {
         email: email,
         password: password,
       })
-      .then()
+      .then(() => {
+        navigate("/login")
+      })
       .catch();
   };
   return (
