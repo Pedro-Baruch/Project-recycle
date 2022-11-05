@@ -74,7 +74,7 @@ export class UserService {
     return user;
   };
 
-  findById = async (id: string) => {
+  findUserById = async (id: string) => {
     const user = await prisma.user.findUnique({
       where: { id },
       select: {
@@ -89,6 +89,19 @@ export class UserService {
 
     if (!user) {
       throw new AppError("Usuário não encontrado!", 404);
+    }
+
+    return user;
+  };
+
+  findUserProfileById = async (id: string) => {
+    const user = await prisma.userProfile.findUnique({
+      where: { id },
+      include: { user: true },
+    });
+
+    if (!user) {
+      throw new AppError("Perfil de usuário não encontrado!", 404);
     }
 
     return user;

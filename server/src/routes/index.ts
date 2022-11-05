@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { adRequestsRoutes } from "./adRequestsRoutes";
 import { adsRoutes } from "./adsRoutes";
 import { authRoutes } from "./authRoutes";
 import { companiesRoutes } from "./companiesRoutes";
@@ -8,6 +9,7 @@ const router = Router();
 
 router.use(authRoutes);
 router.use("/ads", adsRoutes);
+router.use(adRequestsRoutes);
 router.use(usersRoutes);
 router.use("/companies", companiesRoutes);
 

@@ -101,34 +101,22 @@ model CompanyRequests {
   id               String         @id @default(uuid())
   ad               Ad             @relation(fields: [adId], references: [id])
   adId             String
+  accepted         Boolean?
   companyProfile   CompanyProfile @relation(fields: [companyProfileId], references: [id])
   companyProfileId String
   assignedAt       DateTime       @default(now())
   assignedBy       String
-
-  adSituation   AdSituation @relation(fields: [adSituationId], references: [id])
-  adSituationId String      @unique
 }
 
 model UserRequests {
   id            String      @id @default(uuid())
   ad            Ad          @relation(fields: [adId], references: [id])
   adId          String
+  accepted      Boolean?
   userProfile   UserProfile @relation(fields: [userProfileId], references: [id])
   userProfileId String
   assignedAt    DateTime    @default(now())
   assignedBy    String
-
-  adSituation   AdSituation @relation(fields: [adSituationId], references: [id])
-  adSituationId String      @unique
-}
-
-model AdSituation {
-  id              String           @id @default(uuid())
-  sutuation       String
-  createdAt       DateTime         @default(now())
-  userRequests    UserRequests?
-  companyRequests CompanyRequests?
 }
 
 model Denounce {
