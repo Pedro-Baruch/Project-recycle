@@ -26,25 +26,14 @@ export class UserRequestsController {
 
   acceptRequest = async (req: Request, res: Response) => {
     const { id, adRequestId } = req.params;
+    const { responseToRequest } = req.body;
     const { profileId } = req.user;
 
     const adRequest = await this.userRequestsService.acceptRequest(
       id,
       adRequestId,
-      profileId
-    );
-
-    return res.status(200).json(adRequest);
-  };
-
-  refuseRequest = async (req: Request, res: Response) => {
-    const { id, adRequestId } = req.params;
-    const { profileId } = req.user;
-
-    const adRequest = await this.userRequestsService.refuseRequest(
-      id,
-      adRequestId,
-      profileId
+      profileId,
+      responseToRequest
     );
 
     return res.status(200).json(adRequest);

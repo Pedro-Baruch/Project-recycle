@@ -15,13 +15,8 @@ adRequestsRoutes.get(
 );
 
 adRequestsRoutes.patch(
-  "/myAds/:id/adRequests/:adRequestId/accept",
+  "/myAds/:id/adRequests/:adRequestId",
   userRequestsController.acceptRequest
-);
-
-adRequestsRoutes.patch(
-  "/myAds/:id/adRequests/:adRequestId/refuse",
-  userRequestsController.refuseRequest
 );
 
 export { adRequestsRoutes };

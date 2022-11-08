@@ -29,7 +29,10 @@ export class AdService {
   };
 
   getAllAds = async () => {
-    const ads = await prisma.ad.findMany();
+    const ads = await prisma.ad.findMany({
+      where: { validated: true },
+    });
+
     return ads;
   };
 

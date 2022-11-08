@@ -20,7 +20,7 @@ export class UserRequestsService {
       throw new AppError("Ação impossível!");
     }
 
-    if (requests) {
+    if (requests.length > 0) {
       throw new AppError("Solicitação já enviada!");
     }
 
@@ -63,7 +63,8 @@ export class UserRequestsService {
   acceptRequest = async (
     adId: string,
     adRequestId: string,
-    currentUserProfileId: string
+    currentUserProfileId: string,
+    responseToRequest: boolean
   ) => {
     const adService = new AdService();
     const ad = await adService.getAd(adId);
@@ -79,33 +80,7 @@ export class UserRequestsService {
         id: adRequestId,
       },
       data: {
-        accepted: true,
-      },
-    });
-
-    return adRequest;
-  };
-
-  refuseRequest = async (
-    adId: string,
-    adRequestId: string,
-    currentUserProfileId: string
-  ) => {
-    const adService = new AdService();
-    const ad = await adService.getAd(adId);
-
-    if (ad.userProfileId !== currentUserProfileId) {
-      throw new AppError("Usuário não autorizado", 401);
-    }
-
-    await this.getAdRequest(adRequestId);
-
-    const adRequest = await prisma.userRequests.update({
-      where: {
-        id: adRequestId,
-      },
-      data: {
-        accepted: false,
+        accepted: responseToRequest,
       },
     });
 

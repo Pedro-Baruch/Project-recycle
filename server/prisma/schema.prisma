@@ -15,6 +15,7 @@ model User {
   name              String
   email             String   @unique
   password          String
+  admin             Boolean  @default(false)
   activated         Boolean  @default(false)
   confirmationToken String?
   createdAt         DateTime @default(now())
@@ -28,6 +29,7 @@ model Ad {
   id          String   @id @default(uuid())
   title       String
   description String
+  validated   Boolean?
   price       Decimal
   createdAt   DateTime @default(now())
 
@@ -54,9 +56,10 @@ model UserProfile {
 }
 
 model Company {
-  id           String @id @default(uuid())
-  name         String @unique()
-  cnpj         String @unique()
+  id           String   @id @default(uuid())
+  name         String   @unique()
+  cnpj         String   @unique()
+  validated    Boolean?
   openingHours String
   localization String
   description  String

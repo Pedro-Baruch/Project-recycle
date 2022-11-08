@@ -106,4 +106,13 @@ export class UserService {
 
     return user;
   };
+
+  getAllUsers = async () => {
+    const users = await prisma.user.findMany({
+      where: { admin: false },
+      include: { userProfile: true },
+    });
+
+    return users;
+  };
 }

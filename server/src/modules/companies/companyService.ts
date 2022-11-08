@@ -81,7 +81,7 @@ export class CompanyService {
     return companies;
   };
 
-  getCompany = async (id: string) => {
+  getCompanyProfile = async (id: string) => {
     const company = await prisma.companyProfile.findUnique({
       where: {
         id,
@@ -98,8 +98,25 @@ export class CompanyService {
     return company;
   };
 
+  getCompany = async (id: string) => {
+    const company = await prisma.company.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        companyProfile: true,
+      },
+    });
+
+    if (!company) {
+      throw new AppError("Empresa não encontrada");
+    }
+
+    return company;
+  };
+
   updateCompanyPhoto = async (profileId: string, imgUrl: string) => {
-    const company = await this.getCompany(profileId);
+    const company = await this.getCompanyProfile(profileId);
 
     const updatedProfile = await prisma.companyProfile.update({
       where: { id: company.id },
