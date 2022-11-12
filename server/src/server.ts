@@ -1,8 +1,10 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
 import "express-async-errors";
+import "reflect-metadata";
 import { erroMiddleware } from "./middlewares/errorMiddleware";
 import router from "./routes";
+import "./shared/container";
 
 const app = express();
 
