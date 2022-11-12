@@ -1,9 +1,10 @@
-import { hashSync } from "bcrypt";
-import { sign } from "jsonwebtoken";
-import jwtSecret from "../../config/jwtSecret";
-import { prisma } from "../../database/prismaClient";
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../Errors/AppError";
-import { SendEmail } from "../../util/nodemailer";
+import { INJECTS } from "../../shared/container";
+import { IUserProfileResponse } from "./DTOs/IUserProfileResponse";
+import { IUserResponse } from "./DTOs/IUserResponse";
+import { IUserProfileRepository } from "./repositories/IUserProfileRepository";
+import { IUserRepository } from "./repositories/IUserRepository";
 
 interface ICreateUser {
   name: string;
@@ -12,60 +13,17 @@ interface ICreateUser {
   password: string;
 }
 
+@injectable()
 export class UserService {
-  createUser = async ({
-    name,
-    email,
-    password,
-    profilePictureUrl,
-  }: ICreateUser) => {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+  constructor(
+    @inject(INJECTS.USER_REPO)
+    private userRepository: IUserRepository,
+    @inject(INJECTS.USERPROFILE_REPO)
+    private userProfileRepository: IUserProfileRepository
+  ) {}
 
-    if (user) {
-      throw new AppError("Usuário já possui uma conta");
-    }
-
-    const passwordHash = hashSync(password, 8);
-
-    const token = sign({ email: email }, jwtSecret.jwt_access_secret, {
-      expiresIn: jwtSecret.expires_in_token,
-    });
-
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: passwordHash,
-        confirmationToken: token,
-      },
-    });
-
-    if (!newUser) {
-      throw new AppError("Erro ao criar usuário");
-    }
-
-    const sendEmail = new SendEmail();
-    sendEmail.sendMail(
-      "Verificação de email",
-      email,
-      "email-confirmation",
-      newUser.confirmationToken as string
-    );
-
-    const userProfile = await prisma.userProfile.create({
-      data: {
-        userId: newUser.id,
-        profilePictureUrl,
-      },
-    });
-  };
-
-  findbyEmail = async (email: string) => {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+  findUserByEmail = async (email: string): Promise<IUserResponse> => {
+    const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError("Usuário não encontrado!", 404);
@@ -74,18 +32,8 @@ export class UserService {
     return user;
   };
 
-  findUserById = async (id: string) => {
-    const user = await prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        userProfile: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
+  findUserById = async (id: string): Promise<IUserResponse> => {
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new AppError("Usuário não encontrado!", 404);
@@ -94,11 +42,8 @@ export class UserService {
     return user;
   };
 
-  findUserProfileById = async (id: string) => {
-    const user = await prisma.userProfile.findUnique({
-      where: { id },
-      include: { user: true },
-    });
+  findUserProfileById = async (id: string): Promise<IUserProfileResponse> => {
+    const user = await this.userProfileRepository.findById(id);
 
     if (!user) {
       throw new AppError("Perfil de usuário não encontrado!", 404);
@@ -107,11 +52,8 @@ export class UserService {
     return user;
   };
 
-  getAllUsers = async () => {
-    const users = await prisma.user.findMany({
-      where: { admin: false },
-      include: { userProfile: true },
-    });
+  findAllUsers = async (): Promise<IUserResponse[]> => {
+    const users = await this.userRepository.findAllUser();
 
     return users;
   };

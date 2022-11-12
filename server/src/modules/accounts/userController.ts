@@ -1,27 +1,12 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { UserService } from "./userService";
 
 export class UserController {
-  private userService;
+  private userService: UserService;
   constructor() {
-    this.userService = new UserService();
+    this.userService = container.resolve(UserService);
   }
-
-  createUser = async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
-    let url: string | undefined;
-
-    req.imgUrl ? (url = req.imgUrl.url) : (url = undefined);
-
-    await this.userService.createUser({
-      name,
-      email,
-      password,
-      profilePictureUrl: url,
-    });
-
-    return res.status(201).send();
-  };
 
   getUserProfile = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -32,7 +17,7 @@ export class UserController {
   };
 
   getUsers = async (req: Request, res: Response) => {
-    const users = await this.userService.getAllUsers();
+    const users = await this.userService.findAllUsers();
 
     return res.status(200).json(users);
   };
