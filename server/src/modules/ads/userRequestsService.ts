@@ -14,7 +14,7 @@ export class UserRequestsService {
 
     const user = await userService.findUserProfileById(userProfileId);
 
-    const ad = await adService.getAd(adId);
+    const ad = await adService.findAdById(adId);
 
     if (ad.userProfileId === user.id) {
       throw new AppError("Ação impossível!");
@@ -36,7 +36,7 @@ export class UserRequestsService {
 
   getAdRequests = async (adId: string, currentUserProfileId: string) => {
     const adService = new AdService();
-    const ad = await adService.getAd(adId);
+    const ad = await adService.findAdById(adId);
 
     if (ad.userProfileId !== currentUserProfileId) {
       throw new AppError("Usuário não autorizado", 401);
@@ -67,7 +67,7 @@ export class UserRequestsService {
     responseToRequest: boolean
   ) => {
     const adService = new AdService();
-    const ad = await adService.getAd(adId);
+    const ad = await adService.findAdById(adId);
 
     if (ad.userProfileId !== currentUserProfileId) {
       throw new AppError("Usuário não autorizado", 401);

@@ -13,7 +13,7 @@ export class AdminService {
 
   authorizeAd = async (adId: string, validated: boolean) => {
     const adService = new AdService();
-    await adService.getAd(adId);
+    await adService.findAdById(adId);
 
     const verifiedAd = await prisma.ad.update({
       where: {
