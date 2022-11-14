@@ -11,6 +11,8 @@ import { PerfilUsuario } from './pages/Perfil-Usuario/index';
 import { PerfilCompanies } from "./pages/Perfil-Empresa";
 import { UsuarioAd } from "./pages/Usuario-Anuncio";
 import { UsuarioCompany } from "./pages/Usuario-Empresa";
+import { CriarDenuncia } from './pages/Criar-Denuncia/index';
+import { CriarAvalicao } from './pages/Criar-Avaliação/index';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path="/profile/company" element={<PerfilCompanies />} />
             <Route path="/ad" element={<UsuarioAd/>} />
             <Route path="/company" element={<UsuarioCompany/>} />
+            <Route path="/criar/denuncia" element={<CriarDenuncia/>} />
+            <Route path="/criar/avaliacao" element={<CriarAvalicao/>} />
           </Routes>
         </div>
         <Footer />
