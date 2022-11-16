@@ -1,20 +1,32 @@
-import { prisma } from "../../database/prismaClient";
+import { container, inject, injectable } from "tsyringe";
 import { AppError } from "../../Errors/AppError";
+import { INJECTS } from "../../shared/container";
 import { UserService } from "../accounts/userService";
 import { AdService } from "./adService";
+import { IUserRequestRepository } from "./repositories/IUserRequestRepository";
 
+@injectable()
 export class UserRequestsService {
+  private userService: UserService;
+  private adService: AdService;
+
+  constructor(
+    @inject(INJECTS.USER_REQUEST_REPO)
+    private userRequestRepository: IUserRequestRepository
+  ) {
+    this.userService = container.resolve(UserService);
+    this.adService = container.resolve(AdService);
+  }
+
   requestAd = async (adId: string, userProfileId: string) => {
-    const userService = new UserService();
-    const adService = new AdService();
+    const requests = await this.userRequestRepository.findRequestsByAdAndUser(
+      adId,
+      userProfileId
+    );
 
-    const requests = await prisma.userRequests.findMany({
-      where: { userProfileId, adId },
-    });
+    const user = await this.userService.findUserProfileById(userProfileId);
 
-    const user = await userService.findUserProfileById(userProfileId);
-
-    const ad = await adService.findAdById(adId);
+    const ad = await this.adService.findAdById(adId);
 
     if (ad.userProfileId === user.id) {
       throw new AppError("Ação impossível!");
@@ -24,34 +36,30 @@ export class UserRequestsService {
       throw new AppError("Solicitação já enviada!");
     }
 
-    const requestAd = await prisma.userRequests.create({
-      data: {
-        adId,
-        userProfileId,
-        accepted: null,
-        assignedBy: user.user.name,
-      },
-    });
+    const requestAd = await this.userRequestRepository.createRequest(
+      adId,
+      userProfileId,
+      user.user?.email as string
+    );
+
+    return requestAd;
   };
 
-  getAdRequests = async (adId: string, currentUserProfileId: string) => {
-    const adService = new AdService();
-    const ad = await adService.findAdById(adId);
+  findRequestsByAd = async (adId: string, currentUserProfileId: string) => {
+    const ad = await this.adService.findAdById(adId);
 
     if (ad.userProfileId !== currentUserProfileId) {
       throw new AppError("Usuário não autorizado", 401);
     }
-    const requests = await prisma.userRequests.findMany({
-      where: { adId, accepted: null },
-    });
+    const requests = await this.userRequestRepository.findRequestsByAd(adId);
 
     return requests;
   };
 
-  getAdRequest = async (adRequestId: string) => {
-    const adRequest = await prisma.userRequests.findUnique({
-      where: { id: adRequestId },
-    });
+  findAdRequest = async (adRequestId: string) => {
+    const adRequest = await this.userRequestRepository.findAdRequest(
+      adRequestId
+    );
 
     if (!adRequest) {
       throw new AppError("Solicitação não encontrada!");
@@ -66,23 +74,18 @@ export class UserRequestsService {
     currentUserProfileId: string,
     responseToRequest: boolean
   ) => {
-    const adService = new AdService();
-    const ad = await adService.findAdById(adId);
+    const ad = await this.adService.findAdById(adId);
 
     if (ad.userProfileId !== currentUserProfileId) {
       throw new AppError("Usuário não autorizado", 401);
     }
 
-    await this.getAdRequest(adRequestId);
+    await this.findAdRequest(adRequestId);
 
-    const adRequest = await prisma.userRequests.update({
-      where: {
-        id: adRequestId,
-      },
-      data: {
-        accepted: responseToRequest,
-      },
-    });
+    const adRequest = await this.userRequestRepository.acceptRequest(
+      adRequestId,
+      responseToRequest
+    );
 
     return adRequest;
   };

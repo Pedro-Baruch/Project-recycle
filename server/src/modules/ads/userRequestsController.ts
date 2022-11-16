@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { UserRequestsService } from "./userRequestsService";
 
 export class UserRequestsController {
-  private userRequestsService;
+  private userRequestsService: UserRequestsService;
   constructor() {
-    this.userRequestsService = new UserRequestsService();
+    this.userRequestsService = container.resolve(UserRequestsService);
   }
 
   requestAd = async (req: Request, res: Response) => {
@@ -17,7 +18,7 @@ export class UserRequestsController {
   getAdRequests = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { profileId } = req.user;
-    const adRequests = await this.userRequestsService.getAdRequests(
+    const adRequests = await this.userRequestsService.findRequestsByAd(
       id,
       profileId
     );
