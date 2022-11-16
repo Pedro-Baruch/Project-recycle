@@ -1,5 +1,9 @@
-import { prisma } from "../../database/prismaClient";
+import { container, inject, injectable } from "tsyringe";
 import { AppError } from "../../Errors/AppError";
+import { INJECTS } from "../../shared/container";
+import { UserService } from "../accounts/userService";
+import { ICompanyProfileRepository } from "./repositories/ICompanyProfileRepository";
+import { ICompanyRepository } from "./repositories/ICompanyRepository";
 
 interface ICreateCompany {
   name: string;
@@ -11,7 +15,15 @@ interface ICreateCompany {
   profilePictureUrl: string | undefined;
 }
 
+@injectable()
 export class CompanyService {
+  constructor(
+    @inject(INJECTS.COMAPANY_REPO)
+    private companyRepository: ICompanyRepository,
+    @inject(INJECTS.COMAPANYPROFILE_REPO)
+    private companyProfileRepository: ICompanyProfileRepository
+  ) {}
+
   createCompany = async ({
     name,
     cnpj,
@@ -21,75 +33,55 @@ export class CompanyService {
     description,
     profilePictureUrl,
   }: ICreateCompany) => {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        companyProfile: {
-          select: { id: true },
-        },
-      },
-    });
+    const userService: UserService = container.resolve(UserService);
 
-    if (user?.companyProfile?.id) {
+    const user = await userService.findUserById(userId);
+
+    if (user.companyProfile?.companyId) {
       throw new AppError("Usuário já possui uma empresa cadastrada!");
     }
 
-    const company = await prisma.company.findUnique({
-      where: { cnpj },
-    });
+    const company = await this.companyRepository.findByCnpj(cnpj);
 
     if (company) {
       throw new AppError("Empresa já cadastrada!");
     }
 
-    const companyName = await prisma.company.findUnique({
-      where: { name },
-    });
+    const companyName = await this.companyRepository.findByName(name);
 
     if (companyName) {
       throw new AppError("Empresa já cadastrada!");
     }
 
-    const newCompany = await prisma.company.create({
-      data: {
-        name,
-        cnpj,
-        description,
-        localization,
-        openingHours,
-      },
+    const newCompany = await this.companyRepository.create({
+      name,
+      cnpj,
+      description,
+      localization,
+      openingHours,
     });
 
-    const companyProfile = await prisma.companyProfile.create({
-      data: {
-        userId,
-        companyId: newCompany.id,
-        profilePictureUrl,
-      },
+    if (!newCompany) {
+      throw new AppError("Erro ao criar empresa!");
+    }
+
+    const companyProfile = await this.companyProfileRepository.create({
+      companyId: newCompany.id as string,
+      userId,
+      profilePictureUrl,
     });
 
     return companyProfile;
   };
 
-  getAllCompanies = async () => {
-    const companies = await prisma.companyProfile.findMany({
-      include: { company: true },
-    });
+  findAllCompanyProfile = async () => {
+    const companies = await this.companyProfileRepository.findAll();
 
     return companies;
   };
 
-  getCompanyProfile = async (id: string) => {
-    const company = await prisma.companyProfile.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        company: true,
-      },
-    });
+  findCompanyProfile = async (id: string) => {
+    const company = await this.companyProfileRepository.findById(id);
 
     if (!company) {
       throw new AppError("Empresa não encontrada");
@@ -98,15 +90,8 @@ export class CompanyService {
     return company;
   };
 
-  getCompany = async (id: string) => {
-    const company = await prisma.company.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        companyProfile: true,
-      },
-    });
+  findCompany = async (id: string) => {
+    const company = await this.companyRepository.findById(id);
 
     if (!company) {
       throw new AppError("Empresa não encontrada");
@@ -116,14 +101,13 @@ export class CompanyService {
   };
 
   updateCompanyPhoto = async (profileId: string, imgUrl: string) => {
-    const company = await this.getCompanyProfile(profileId);
+    const company = await this.findCompanyProfile(profileId);
 
-    const updatedProfile = await prisma.companyProfile.update({
-      where: { id: company.id },
-      data: {
-        profilePictureUrl: imgUrl,
-      },
-    });
+    const updatedProfile =
+      await this.companyProfileRepository.updateCompanyPhoto(
+        company.companyId,
+        imgUrl
+      );
 
     return updatedProfile;
   };

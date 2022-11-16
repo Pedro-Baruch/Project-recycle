@@ -37,7 +37,7 @@ export class AdminService {
 
   authorizeCompany = async (companyId: string, validated: boolean) => {
     const companyService = new CompanyService();
-    await companyService.getCompany(companyId);
+    await companyService.findCompany(companyId);
 
     const verifiedCompany = await prisma.company.update({
       where: {

@@ -5,11 +5,17 @@ import { IUserProfileRepository } from "../../modules/accounts/repositories/IUse
 import { IUserRepository } from "../../modules/accounts/repositories/IUserRepository";
 import { IAdRepository } from "../../modules/ads/repositories/IAdRepository";
 import { AdRepository } from "../../modules/ads/repositories/implementations/AdRepository";
+import { ICompanyProfileRepository } from "../../modules/companies/repositories/ICompanyProfileRepository";
+import { ICompanyRepository } from "../../modules/companies/repositories/ICompanyRepository";
+import { CompanyProfileRepository } from "../../modules/companies/repositories/implementations/CompanyProfileRepository";
+import { CompanyRepository } from "../../modules/companies/repositories/implementations/CompanyRepository";
 
 export enum INJECTS {
   USER_REPO = "USER_REPOSITORY",
   USERPROFILE_REPO = "USERPROFILE_REPOSITORY",
   AD_REPO = "AD_REPOSITORY",
+  COMAPANY_REPO = "COMPANY_REPOSITORY",
+  COMAPANYPROFILE_REPO = "COMPANYPROFILE_REPOSITORY",
 }
 
 container.registerSingleton<IUserRepository>(INJECTS.USER_REPO, UserRepository);
@@ -19,3 +25,11 @@ container.registerSingleton<IUserProfileRepository>(
 );
 
 container.registerSingleton<IAdRepository>(INJECTS.AD_REPO, AdRepository);
+container.registerSingleton<ICompanyRepository>(
+  INJECTS.COMAPANY_REPO,
+  CompanyRepository
+);
+container.registerSingleton<ICompanyProfileRepository>(
+  INJECTS.COMAPANYPROFILE_REPO,
+  CompanyProfileRepository
+);

@@ -1,4 +1,4 @@
-import { UserProfile } from "@prisma/client";
+import { CompanyProfile, UserProfile } from "@prisma/client";
 
 export interface IUserResponse {
   id: string;
@@ -7,4 +7,5 @@ export interface IUserResponse {
   password: string;
   confirmationToken: string | null;
   userProfile?: UserProfile | null;
+  companyProfile?: CompanyProfile;
 }
