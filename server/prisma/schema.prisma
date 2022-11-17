@@ -90,7 +90,7 @@ model Tag {
 }
 
 model AdByTag {
-  ad         Ad       @relation(fields: [adId], references: [id])
+  ad         Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
   adId       String
   tag        Tag      @relation(fields: [tagId], references: [id])
   tagId      String
