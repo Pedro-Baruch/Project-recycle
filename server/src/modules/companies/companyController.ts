@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { CompanyService } from "./companyService";
 
 export class CompanyController {
-  private companyService;
+  private companyService: CompanyService;
   constructor() {
-    this.companyService = new CompanyService();
+    this.companyService = container.resolve(CompanyService);
   }
 
   createCompany = async (req: Request, res: Response) => {
@@ -29,14 +30,14 @@ export class CompanyController {
   };
 
   getAllCompanies = async (req: Request, res: Response) => {
-    const companies = await this.companyService.getAllCompanies();
+    const companies = await this.companyService.findAllCompanyProfile();
 
     return res.status(200).json(companies);
   };
 
   getCompany = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const company = await this.companyService.getCompany(id);
+    const company = await this.companyService.findCompanyProfile(id);
 
     return res.status(200).json(company);
   };

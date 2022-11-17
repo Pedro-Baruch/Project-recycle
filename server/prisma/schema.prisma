@@ -15,6 +15,7 @@ model User {
   name              String
   email             String   @unique
   password          String
+  admin             Boolean  @default(false)
   activated         Boolean  @default(false)
   confirmationToken String?
   createdAt         DateTime @default(now())
@@ -28,10 +29,11 @@ model Ad {
   id          String   @id @default(uuid())
   title       String
   description String
+  validated   Boolean?
   price       Decimal
   createdAt   DateTime @default(now())
 
-  userProfile        UserProfile          @relation(fields: [userProfileId], references: [id])
+  userProfile        UserProfile          @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId      String
   ads                AdByTag[]
   companyRequests    CompanyRequests[]
@@ -43,7 +45,7 @@ model Ad {
 model UserProfile {
   id                String  @id @default(uuid())
   profilePictureUrl String?
-  user              User    @relation(fields: [userId], references: [id])
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String  @unique
 
   ads                           Ad[]
@@ -54,9 +56,10 @@ model UserProfile {
 }
 
 model Company {
-  id           String @id @default(uuid())
-  name         String @unique()
-  cnpj         String @unique()
+  id           String   @id @default(uuid())
+  name         String   @unique()
+  cnpj         String   @unique()
+  validated    Boolean?
   openingHours String
   localization String
   description  String
@@ -67,9 +70,9 @@ model Company {
 model CompanyProfile {
   id                String  @id @default(uuid())
   profilePictureUrl String?
-  user              User    @relation(fields: [userId], references: [id])
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String  @unique
-  company           Company @relation(fields: [companyId], references: [id])
+  company           Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
   companyId         String  @unique
 
   companyRequests               CompanyRequests[]
@@ -78,16 +81,16 @@ model CompanyProfile {
 }
 
 model Tag {
-  id            String      @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  userProfile   UserProfile @relation(fields: [userProfileId], references: [id])
-  userProfileId String
+  userProfile   UserProfile? @relation(fields: [userProfileId], references: [id], onDelete: SetNull)
+  userProfileId String?
 
   tags AdByTag[]
 }
 
 model AdByTag {
-  ad         Ad       @relation(fields: [adId], references: [id])
+  ad         Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
   adId       String
   tag        Tag      @relation(fields: [tagId], references: [id])
   tagId      String
@@ -101,34 +104,22 @@ model CompanyRequests {
   id               String         @id @default(uuid())
   ad               Ad             @relation(fields: [adId], references: [id])
   adId             String
+  accepted         Boolean?
   companyProfile   CompanyProfile @relation(fields: [companyProfileId], references: [id])
   companyProfileId String
   assignedAt       DateTime       @default(now())
   assignedBy       String
-
-  adSituation   AdSituation @relation(fields: [adSituationId], references: [id])
-  adSituationId String      @unique
 }
 
 model UserRequests {
   id            String      @id @default(uuid())
-  ad            Ad          @relation(fields: [adId], references: [id])
+  ad            Ad          @relation(fields: [adId], references: [id], onDelete: Cascade)
   adId          String
-  userProfile   UserProfile @relation(fields: [userProfileId], references: [id])
+  accepted      Boolean?
+  userProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
   assignedAt    DateTime    @default(now())
   assignedBy    String
-
-  adSituation   AdSituation @relation(fields: [adSituationId], references: [id])
-  adSituationId String      @unique
-}
-
-model AdSituation {
-  id              String           @id @default(uuid())
-  sutuation       String
-  createdAt       DateTime         @default(now())
-  userRequests    UserRequests?
-  companyRequests CompanyRequests?
 }
 
 model Denounce {
@@ -154,22 +145,22 @@ model CompanyDenouncesAd {
 }
 
 model UserDenouncesAd {
-  denounce      Denounce    @relation(fields: [denounceId], references: [id])
+  denounce      Denounce    @relation(fields: [denounceId], references: [id], onDelete: Cascade)
   denounceId    String
-  ad            Ad          @relation(fields: [adId], references: [id])
+  ad            Ad          @relation(fields: [adId], references: [id], onDelete: Cascade)
   adId          String
-  userProfile   UserProfile @relation(fields: [userProfileId], references: [id])
+  userProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
 
   @@id([adId, userProfileId, denounceId])
 }
 
 model DenounceBetweenUserAndCompany {
-  denounce         Denounce       @relation(fields: [denounceId], references: [id])
+  denounce         Denounce       @relation(fields: [denounceId], references: [id], onDelete: Cascade)
   denounceId       String
-  companyProfile   CompanyProfile @relation(fields: [companyProfileId], references: [id])
+  companyProfile   CompanyProfile @relation(fields: [companyProfileId], references: [id], onDelete: Cascade)
   companyProfileId String
-  userProfile      UserProfile    @relation(fields: [userProfileId], references: [id])
+  userProfile      UserProfile    @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId    String
 
   @@id([companyProfileId, userProfileId, denounceId])

@@ -1,42 +1,48 @@
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../Errors/AppError";
-import { prisma } from "./../../database/prismaClient";
+import { INJECTS } from "../../shared/container";
+import { CreateAdDTO } from "./DTOs/CreateAdDTO";
+import { IAdResponse } from "./DTOs/IAdResponse";
+import { IUpdateAd } from "./DTOs/IUpdateAd";
+import { IAdRepository } from "./repositories/IAdRepository";
 
-interface ICreateAd {
-  title: string;
-  description: string;
-  price: number;
-  userId: string;
-}
-
-interface IUpdateAd {
-  title: string;
-  description: string;
-  adId: string;
-}
-
+@injectable()
 export class AdService {
-  createAd = async ({ title, description, price, userId }: ICreateAd) => {
-    const ad = await prisma.ad.create({
-      data: {
-        title,
-        description,
-        price,
-        userProfileId: userId,
-      },
+  constructor(
+    @inject(INJECTS.AD_REPO)
+    private adRepository: IAdRepository
+  ) {}
+
+  createAd = async ({
+    title,
+    description,
+    price,
+    userProfileId,
+  }: CreateAdDTO) => {
+    const ad = await this.adRepository.create({
+      title,
+      description,
+      price,
+      userProfileId,
     });
 
     return ad;
   };
 
-  getAllAds = async () => {
-    const ads = await prisma.ad.findMany();
+  findAllAds = async (): Promise<IAdResponse[]> => {
+    const ads = await this.adRepository.findAll();
+
     return ads;
   };
 
-  getAd = async (adId: string) => {
-    const ad = await prisma.ad.findUnique({
-      where: { id: adId },
-    });
+  findAllAdsByUser = async (userProfileId: string): Promise<IAdResponse[]> => {
+    const ads = await this.adRepository.findAllByUser(userProfileId);
+
+    return ads;
+  };
+
+  findAdById = async (adId: string): Promise<IAdResponse> => {
+    const ad = await this.adRepository.findById(adId);
 
     if (!ad) {
       throw new AppError("Anúncio não encontrado!", 404);
@@ -45,32 +51,38 @@ export class AdService {
     return ad;
   };
 
-  updateAd = async ({ adId, title, description }: IUpdateAd) => {
-    const ad = await this.getAd(adId);
+  updateAd = async ({
+    adId,
+    title,
+    description,
+    userProfileId,
+  }: IUpdateAd): Promise<IAdResponse> => {
+    const ad = await this.findAdById(adId);
 
-    if (!(title && description)) {
-      throw new AppError("Título e descrição não podem ser nulos");
+    if (ad.userProfileId != userProfileId) {
+      throw new AppError("Propriétário não identificado!");
     }
 
-    const updatedAd = await prisma.ad.update({
-      where: {
-        id: adId,
-      },
-      data: {
-        title,
-        description,
-      },
+    const updatedAd = await this.adRepository.update({
+      adId,
+      description,
+      title,
     });
 
     return updatedAd;
   };
 
-  removeAd = async (adId: string) => {
-    const ad = await this.getAd(adId);
+  removeAd = async (
+    adId: string,
+    userProfileId: string
+  ): Promise<IAdResponse> => {
+    const ad = await this.findAdById(adId);
 
-    const adDeleted = await prisma.ad.delete({
-      where: { id: adId },
-    });
+    if (ad.userProfileId != userProfileId) {
+      throw new AppError("Propriétário não identificado!");
+    }
+
+    const adDeleted = await this.adRepository.delete(adId);
 
     return adDeleted;
   };

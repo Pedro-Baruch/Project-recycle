@@ -15,3 +15,15 @@ export const adRegistrationValidator = {
     }),
   }),
 };
+
+export const adUpdateValidator = {
+  [Segments.BODY]: Joi.object().keys({
+    title: Joi.string().required().messages({
+      "string.empty": `O campo title não pode ser vazio!`,
+    }),
+
+    description: Joi.string().required().messages({
+      "string.empty": `O campo description não pode ser vazio!`,
+    }),
+  }),
+};

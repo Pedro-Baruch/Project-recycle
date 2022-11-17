@@ -1,48 +1,70 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { AdService } from "./adService";
 
 export class AdController {
-  private adService;
+  private adService: AdService;
   constructor() {
-    this.adService = new AdService();
+    this.adService = container.resolve(AdService);
   }
 
-  create = async (req: Request, res: Response) => {
+  createAd = async (req: Request, res: Response): Promise<Response> => {
     const { title, description, price } = req.body;
     const { profileId: id } = req.user;
 
-    await this.adService.createAd({ title, description, price, userId: id });
+    await this.adService.createAd({
+      title,
+      description,
+      price,
+      userProfileId: id,
+    });
 
     return res.status(201).send();
   };
 
-  getAll = async (req: Request, res: Response) => {
-    const ads = await this.adService.getAllAds();
+  getAllAds = async (req: Request, res: Response): Promise<Response> => {
+    const ads = await this.adService.findAllAds();
 
     return res.status(200).json(ads);
   };
 
-  getAd = async (req: Request, res: Response) => {
+  getAd = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
 
-    const ad = await this.adService.getAd(id);
+    const ad = await this.adService.findAdById(id);
 
     return res.status(200).json(ad);
   };
 
-  delete = async (req: Request, res: Response) => {
-    const { id } = req.params;
+  // fazer uma rota
+  getMyAds = async (req: Request, res: Response): Promise<Response> => {
+    const { profileId } = req.user;
 
-    const adDeleted = await this.adService.removeAd(id);
+    const ads = await this.adService.findAllAdsByUser(profileId);
+
+    return res.status(200).json(ads);
+  };
+
+  removeAd = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const { profileId } = req.user;
+
+    const adDeleted = await this.adService.removeAd(id, profileId);
 
     return res.status(200).json(adDeleted);
   };
 
-  update = async (req: Request, res: Response) => {
+  update = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
+    const { profileId } = req.user;
     const { title, description } = req.body;
 
-    const ad = await this.adService.updateAd({ adId: id, title, description });
+    const ad = await this.adService.updateAd({
+      adId: id,
+      title,
+      description,
+      userProfileId: profileId,
+    });
 
     return res.status(200).json(ad);
   };
