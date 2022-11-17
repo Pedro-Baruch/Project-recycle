@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { adminRoutes } from "./adminRoutes";
 import { adRequestsRoutes } from "./adRequestsRoutes";
 import { adsRoutes } from "./adsRoutes";
 import { authRoutes } from "./authRoutes";
@@ -10,9 +9,8 @@ const router = Router();
 
 router.use(authRoutes);
 router.use(usersRoutes);
-router.use("/ads", adsRoutes);
+router.use(adsRoutes);
 router.use(adRequestsRoutes);
-router.use("/companies", companiesRoutes);
-router.use(adminRoutes);
+router.use(companiesRoutes);
 
 export default router;

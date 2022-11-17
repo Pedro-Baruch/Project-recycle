@@ -68,4 +68,18 @@ export class AdController {
 
     return res.status(200).json(ad);
   };
+
+  authorizeAd = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const { validated } = req.body;
+
+    const ad = await this.adService.authorizeAd(id, validated);
+    return res.status(200).json(ad);
+  };
+
+  getUnverifiedAds = async (req: Request, res: Response): Promise<Response> => {
+    const ads = await this.adService.findUnverifiedAds();
+
+    return res.status(200).json(ads);
+  };
 }

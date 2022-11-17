@@ -63,4 +63,36 @@ export class CompanyRepository implements ICompanyRepository {
 
     return company;
   }
+
+  async findAllCompanies(): Promise<ICompanyResponse[]> {
+    const companies = await prisma.company.findMany({
+      where: { validated: true },
+      include: { companyProfile: true },
+    });
+
+    return companies;
+  }
+
+  async findUnverifiedCompanies(): Promise<ICompanyResponse[]> {
+    const companies = await prisma.company.findMany({
+      where: { validated: null },
+      include: { companyProfile: true },
+    });
+
+    return companies;
+  }
+
+  async authorizeCompany(
+    companyId: string,
+    validated: boolean
+  ): Promise<ICompanyResponse | null> {
+    const company = await prisma.company.update({
+      where: { id: companyId },
+      data: {
+        validated,
+      },
+    });
+
+    return company;
+  }
 }
