@@ -97,7 +97,7 @@ export const CriarAnuncio = () => {
               children="Criar anúncio"
               height="50px"
               width="120px"
-              onClick={() => {console.log("a")}}
+              
             />
           </div>
         </form>

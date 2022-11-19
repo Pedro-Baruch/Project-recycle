@@ -104,7 +104,7 @@ export function CriarEmpresa() {
             children="Criar empresa"
             height="50px"
             width="120px"
-            onClick={() => {}}
+            
           />
         </div>
       </form>
