@@ -111,4 +111,25 @@ export class CompanyService {
 
     return updatedProfile;
   };
+
+  findAllCompanies = async () => {
+    const companies = await this.companyRepository.findAllCompanies();
+
+    return companies;
+  };
+
+  findUnverifiedCompanies = async () => {
+    const companies = await this.companyRepository.findUnverifiedCompanies();
+
+    return companies;
+  };
+
+  authorizeCompany = async (companyId: string, validated: boolean) => {
+    const company = await this.companyRepository.authorizeCompany(
+      companyId,
+      validated
+    );
+
+    return company;
+  };
 }

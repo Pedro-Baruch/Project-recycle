@@ -2,8 +2,8 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "../../Errors/AppError";
 import { INJECTS } from "../../shared/container";
 import { CreateAdDTO } from "./DTOs/CreateAdDTO";
-import { IAdResponse } from "./DTOs/IAdResponse";
 import { IUpdateAd } from "./DTOs/IUpdateAd";
+import { Ad } from "./entities/Ad";
 import { IAdRepository } from "./repositories/IAdRepository";
 
 @injectable()
@@ -29,19 +29,19 @@ export class AdService {
     return ad;
   };
 
-  findAllAds = async (): Promise<IAdResponse[]> => {
+  findAllAds = async (): Promise<Ad[]> => {
     const ads = await this.adRepository.findAll();
 
     return ads;
   };
 
-  findAllAdsByUser = async (userProfileId: string): Promise<IAdResponse[]> => {
+  findAllAdsByUser = async (userProfileId: string): Promise<Ad[]> => {
     const ads = await this.adRepository.findAllByUser(userProfileId);
 
     return ads;
   };
 
-  findAdById = async (adId: string): Promise<IAdResponse> => {
+  findAdById = async (adId: string): Promise<Ad> => {
     const ad = await this.adRepository.findById(adId);
 
     if (!ad) {
@@ -56,7 +56,7 @@ export class AdService {
     title,
     description,
     userProfileId,
-  }: IUpdateAd): Promise<IAdResponse> => {
+  }: IUpdateAd): Promise<Ad> => {
     const ad = await this.findAdById(adId);
 
     if (ad.userProfileId != userProfileId) {
@@ -72,10 +72,7 @@ export class AdService {
     return updatedAd;
   };
 
-  removeAd = async (
-    adId: string,
-    userProfileId: string
-  ): Promise<IAdResponse> => {
+  removeAd = async (adId: string, userProfileId: string): Promise<Ad> => {
     const ad = await this.findAdById(adId);
 
     if (ad.userProfileId != userProfileId) {
@@ -85,5 +82,20 @@ export class AdService {
     const adDeleted = await this.adRepository.delete(adId);
 
     return adDeleted;
+  };
+
+  authorizeAd = async (adId: string, validated: boolean): Promise<Ad> => {
+    const add = await this.findAdById(adId);
+    console.log(add);
+
+    const ad = await this.adRepository.authorizeAd(adId, validated);
+
+    return ad;
+  };
+
+  findUnverifiedAds = async (): Promise<Ad[]> => {
+    const ads = await this.adRepository.findUnverifiedAds();
+
+    return ads;
   };
 }

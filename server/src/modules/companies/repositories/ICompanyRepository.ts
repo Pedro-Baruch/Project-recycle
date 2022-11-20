@@ -7,4 +7,10 @@ export interface ICompanyRepository {
   findById(id: string): Promise<ICompanyResponse | null>;
   findByCnpj(cnpj: string): Promise<ICompanyResponse | null>;
   findByName(name: string): Promise<ICompanyResponse | null>;
+  findAllCompanies(): Promise<ICompanyResponse[]>;
+  findUnverifiedCompanies(): Promise<ICompanyResponse[]>;
+  authorizeCompany(
+    companyId: string,
+    validated: boolean
+  ): Promise<ICompanyResponse | null>;
 }
