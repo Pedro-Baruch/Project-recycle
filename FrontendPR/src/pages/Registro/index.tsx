@@ -1,13 +1,23 @@
 import axios from "axios";
 import { FormEvent, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
+import { useNavigate } from "react-router-dom";
 
 export const Registro = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+
+  const sucesso = () => {
+   alert('conta registrada')
+   navigate("/login")
+  }
+  const errorReg = () => {
+   alert('conta não registrada')
+   
+  }
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -20,8 +30,8 @@ export const Registro = () => {
         email: email,
         password: password,
       })
-      .then()
-      .catch();
+      .then(sucesso)
+      .catch(errorReg);
   };
   return (
     <div className="Container">
@@ -58,16 +68,14 @@ export const Registro = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={"/login"}>
+          
             <Button
               children="Registrar"
               height="30px"
               width="100px"
-              onClick={() => {
-                alert("Conta registrada");
-              }}
+              
             />
-          </Link>
+          
         </div>
       </form>
     </div>

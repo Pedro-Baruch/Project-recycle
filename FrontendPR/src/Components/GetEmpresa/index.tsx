@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import { api } from "../../hooks/axiosApi";
 import { config } from "../../hooks/helperApi";
+import { Navigation } from "../Nav";
 
 interface Company {
   company: {
     id?: string;
-    CNPJ: string;
+    cnpj: string;
     name: string;
     localization: string;
     openingHours: string;
@@ -25,39 +26,43 @@ export function ExibirCompanies() {
 
   return (
     <div className="container-ad">
-      {profile.map((aux) => (
-        <ul className="container-Informacoes">
-          <li className="usuario-foto">
-            <img className="foto-perfil" />
-            <p>{aux.company.name}</p>
-          </li>
-          <li>{aux.company.CNPJ}</li>
-          <li>{aux.company.localization}</li>
-          <li>{aux.company.openingHours}</li>
-          <li>{aux.company.description}</li>
-          <li>
-            <img className="foto-produto" />
-          </li>
-          <li className="solicitar-denunciar">
-            <Button
-              children="Solicitar"
-              height="30px"
-              width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
-            />
-            <Button
-              children="Denunciar"
-              height="30px"
-              width="100px"
-              onClick={() => {
-                console.log("click");
-              }}
-            />
-          </li>
-        </ul>
-      ))}
+      <div>
+      <Navigation/>
+
+        {profile.map((aux) => (
+          <ul className="container-Informacoes">
+            <li className="usuario-foto">
+              <img className="foto-perfil" />
+              <p>{aux.company.name}</p>
+            </li>
+            <li>{aux.company.cnpj}</li>
+            <li>{aux.company.localization}</li>
+            <li>{aux.company.openingHours}</li>
+            <li>{aux.company.description}</li>
+            <li>
+              <img className="foto-produto" />
+            </li>
+            <li className="solicitar-denunciar">
+              <Button
+                children="Solicitar"
+                height="30px"
+                width="100px"
+                onClick={() => {
+                  console.log("click");
+                }}
+              />
+              <Button
+                children="Denunciar"
+                height="30px"
+                width="100px"
+                onClick={() => {
+                  console.log("click");
+                }}
+              />
+            </li>
+          </ul>
+        ))}
+      </div>
     </div>
   );
 }
