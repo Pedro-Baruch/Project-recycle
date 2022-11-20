@@ -5,7 +5,7 @@ interface Props {
   children?: React.ReactNode;
   height: string;
   width: string;
-  onClick?:() => void;
+  onClick?:() => any;
 }
 
 const Button: React.FC<Props> = ({ children, height, width,onClick }) => {

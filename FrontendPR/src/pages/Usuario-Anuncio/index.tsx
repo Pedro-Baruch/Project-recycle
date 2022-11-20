@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../Components/GetAnuncios/exibir.css";
 import "../Usuario-Anuncio/usuario-ad.css";
@@ -18,12 +19,14 @@ export const UsuarioAd = () => {
           <img className="foto-produto" />
         </li>
         <li className="solicitar-denunciar">
+          
           <Button
             children="Editar"
             height="30px"
             width="100px"
             onClick={() => {}}
-          />
+            />
+           
           <Button
             children="Encerrar"
             height="30px"
@@ -33,12 +36,14 @@ export const UsuarioAd = () => {
         </li>
       </ul>
       <div className="criar-Button-user">
+        <Link to="/create/ad">
         <Button
           children="Criar Ad"
           height="30px"
           width="100px"
           onClick={() => {}}
-        />
+          />
+          </Link>
       </div>
     </div>
   );

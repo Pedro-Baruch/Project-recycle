@@ -1,8 +1,9 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +11,7 @@ export const Login = () => {
 
   let setToken = (token: string) => {
     localStorage.removeItem("authToken")
-    localStorage.setItem("authToken", token);
+    localStorage.setItem("authToken", token);    
   };
 
   const handleSubmit = (event: FormEvent) => {

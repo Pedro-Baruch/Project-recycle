@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://pedro:1234@localhost:6543/ProjectRecycle?schema=public"
 }
 
 model User {
