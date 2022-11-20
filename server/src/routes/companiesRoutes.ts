@@ -13,7 +13,7 @@ const companyConntroller = new CompanyController();
 
 companiesRoutes.use(authenticated);
 companiesRoutes.post(
-  "/create",
+  "/companies/create",
   upload.single("fotoDoPerfil"),
   celebrate(companyRegistrationValidator),
   profileImageUpload,
