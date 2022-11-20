@@ -29,13 +29,13 @@ export class CompanyController {
     return res.status(201).send();
   };
 
-  getAllCompanies = async (req: Request, res: Response) => {
+  getAllCompaniesProfile = async (req: Request, res: Response) => {
     const companies = await this.companyService.findAllCompanyProfile();
 
     return res.status(200).json(companies);
   };
 
-  getCompany = async (req: Request, res: Response) => {
+  getCompanyProfile = async (req: Request, res: Response) => {
     const { id } = req.params;
     const company = await this.companyService.findCompanyProfile(id);
 
@@ -52,5 +52,36 @@ export class CompanyController {
     );
 
     return res.status(200).json(companyProfile);
+  };
+
+  getAllCompanies = async (req: Request, res: Response) => {
+    const companies = await this.companyService.findAllCompanies();
+
+    return res.status(200).json(companies);
+  };
+
+  getCompany = async (req: Request, res: Response) => {
+    const { companyId } = req.params;
+    const company = await this.companyService.findCompanyProfile(companyId);
+
+    return res.status(200).json(company);
+  };
+
+  getUnverifiedCompanies = async (req: Request, res: Response) => {
+    const compainies = await this.companyService.findUnverifiedCompanies();
+
+    return res.status(200).json(compainies);
+  };
+
+  authorizeCompany = async (req: Request, res: Response) => {
+    const { companyId } = req.params;
+    const { validated } = req.body;
+
+    const company = await this.companyService.authorizeCompany(
+      companyId,
+      validated
+    );
+
+    return res.status(200).json(company);
   };
 }
