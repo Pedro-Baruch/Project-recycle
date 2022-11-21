@@ -1,25 +1,23 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
 import "../../pages/Criar-Anuncio/create.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   let setToken = (token: string) => {
     localStorage.removeItem("authToken")
-    localStorage.setItem("authToken", token);
-    
+    localStorage.setItem("authToken", token);    
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const URL = "http://localhost:3000/login";
-
-    
 
     axios
       .post(URL, {
@@ -28,9 +26,11 @@ export const Login = () => {
       })
       .then((response) => {
         setToken(response.data.token);
+        navigate("/home");
       })
       .catch();
   };
+
 
   return (
     <div className="Container">
@@ -57,13 +57,13 @@ export const Login = () => {
           />
         </div>
         <div className="ButtonCriar">
-          <Link to={"/home"}>
+          
             <Button
               children="Login"
               height="30px"
               width="100px"
             />
-          </Link>
+          
         </div>
       </form>
     </div>

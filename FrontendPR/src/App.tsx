@@ -13,6 +13,7 @@ import { UsuarioAd } from "./pages/Usuario-Anuncio";
 import { UsuarioCompany } from "./pages/Usuario-Empresa";
 import { CriarDenuncia } from './pages/Criar-Denuncia/index';
 import { CriarAvalicao } from './pages/Criar-Avaliação/index';
+import { ExibirCompanies } from './Components/GetEmpresa/index';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Registro />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/home/company" element={<ExibirCompanies/>} />
             <Route path="/create/ad" element={<CriarAnuncio />} />
             <Route path="/create/company" element={<CriarEmpresa />} />
             <Route path="/profile/user" element={<PerfilUsuario />} />

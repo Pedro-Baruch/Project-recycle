@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '../../Components/Button/index';
 import "../../Components/GetAnuncios/exibir.css";
 import "../Usuario-Anuncio/usuario-ad.css";
@@ -29,17 +30,18 @@ export const UsuarioCompany = () => {
             children="Encerrar"
             height="30px"
             width="100px"
-            onClick={() => {}}
+            
           />
         </li>
       </ul>
       <div className="criar-Button-user">
+        <Link to={"/create/company"}>
         <Button
           children="Criar Ad"
           height="30px"
           width="100px"
-          onClick={() => {}}
-        />
+          />
+          </Link>
       </div>
     </div>
   )

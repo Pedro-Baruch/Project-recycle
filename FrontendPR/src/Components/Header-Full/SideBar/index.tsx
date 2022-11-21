@@ -30,10 +30,10 @@ const Sidebar = ({ active }: ActiveProps) => {
         <Link to={"/home"}>
           <SidebarItem Icon={FaHome} Text="Home"></SidebarItem>
         </Link>
-        <Link to={"/create/company"}>
+        <Link to={"/company"}>
           <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />
         </Link>
-        <Link to="/create/ad">
+        <Link to="/ad">
           <SidebarItem Icon={FaRegFileAlt} Text="Anuncios" />
         </Link>
         <SidebarItem Icon={FaEnvelope} Text="Notificações" />
