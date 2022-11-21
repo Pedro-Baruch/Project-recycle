@@ -34,6 +34,15 @@ export const UsuarioAd = () => {
                 width="100px"
                 onClick={() => navigate(`/meusAnuncios/editar/${ad.id}`)}
               />
+
+            }
+            button2 = {
+              <Button
+                children="Deletar"
+                height="30px"
+                width="100px"
+                onClick={() => navigate(`/meusAnuncios/deletar/${ad.id}`)}
+              />
             }
           />
         ))

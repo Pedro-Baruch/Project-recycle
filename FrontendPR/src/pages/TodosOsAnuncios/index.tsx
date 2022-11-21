@@ -15,6 +15,7 @@ export const TodosOsAnuncios = () => {
   useEffect(() => {
     api.get("/ads", config).then((response) => {
       setAds(response.data);
+      console.log(ads)
     });
   }, []);
 
@@ -22,7 +23,7 @@ export const TodosOsAnuncios = () => {
     <div>
       {
         ads.map((ad) => (
-          <Anuncio 
+          <Anuncio
             key={ad.id}
             title = {ad.title}
             description = {ad.description}

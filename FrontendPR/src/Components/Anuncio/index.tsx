@@ -1,5 +1,7 @@
 
 interface AnuncioProps {
+  userName?: string
+  profileImg?: string
   title: string
   description: string
   price: number
@@ -8,13 +10,13 @@ interface AnuncioProps {
 
 }
 
-export function Anuncio ({title, description, price, button1, button2}: AnuncioProps) {
+export function Anuncio ({userName, profileImg, title, description, price, button1, button2}: AnuncioProps) {
   return (
     <div className="container-ad">
         <div className="container-Informacoes">
           <h3 className="usuario-foto">
-            <img className="foto-perfil" />
-            <p>Usuário</p>
+            <img className="foto-perfil" src={profileImg}/>
+            <p>{userName}</p>
           </h3>
           <h2>{title}</h2>
           <p>{description}</p>

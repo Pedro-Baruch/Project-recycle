@@ -7,6 +7,7 @@ import { CriarAnuncio } from "./pages/Criar-Anuncio";
 import { CriarAvalicao } from './pages/Criar-Avaliação/index';
 import { CriarDenuncia } from './pages/Criar-Denuncia/index';
 import { CriarEmpresa } from "./pages/Criar-Empresa";
+import { DeletarAnuncio } from "./pages/DeletarAnuncio";
 import { EditarAnuncio } from "./pages/EditarAnuncio";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/criar/avaliacao" element={<CriarAvalicao/>} />
             <Route path="/meusAnuncios" element={<UsuarioAd/>} />
             <Route path="/meusAnuncios/editar/:id" element={<EditarAnuncio/>} />
+            <Route path="/meusAnuncios/deletar/:id" element={<DeletarAnuncio/>} />
           </Routes>
         </div>
         <Footer />
