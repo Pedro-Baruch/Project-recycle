@@ -31,7 +31,6 @@ export function ExibirAd() {
           <li key={aux.id}>{aux.title}</li>
           <li>{aux.description}</li>
           <li>Preço: R${aux.price}</li>
-          <li className="pruduto-tag">tag</li>
           <li>
             <img className="foto-produto" />
           </li>
