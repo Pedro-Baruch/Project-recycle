@@ -1,22 +1,16 @@
-import React from "react";
-import { Container, Content } from "./styles";
 import {
-  FaTimes,
-  FaHome,
-  FaEnvelope,
-  FaRegSun,
-  FaUserAlt,
-  FaIdCardAlt,
-  FaRegFileAlt,
+  FaEnvelope, FaHome, FaIdCardAlt,
+  FaRegFileAlt, FaRegSun, FaTimes, FaUserAlt
 } from "react-icons/fa";
+import { Container, Content } from "./styles";
 
 interface ActiveProps {
   active: any;
   onClick: any;
 }
 
-import SidebarItem from "../Side-Itens";
 import { Link } from "react-router-dom";
+import SidebarItem from "../Side-Itens";
 
 const Sidebar = ({ active }: ActiveProps) => {
   const closeSidebar = () => {
@@ -35,6 +29,9 @@ const Sidebar = ({ active }: ActiveProps) => {
         </Link>
         <Link to="/ad">
           <SidebarItem Icon={FaRegFileAlt} Text="Anuncios" />
+        </Link>
+        <Link to="meusAnuncios">
+          <SidebarItem Icon={FaRegFileAlt} Text="Meus Anúncios" />
         </Link>
         <SidebarItem Icon={FaEnvelope} Text="Notificações" />
         <Link to="/profile/user">

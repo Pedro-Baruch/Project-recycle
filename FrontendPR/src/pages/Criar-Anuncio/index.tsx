@@ -1,11 +1,10 @@
+import { AxiosResponse } from 'axios';
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
 import { api } from "../../hooks/axiosApi";
 import { config } from "../../hooks/helperApi";
 import "./create.css";
-import { useNavigate } from "react-router-dom";
-import { response } from 'express';
-import { AxiosResponse } from 'axios';
 
 interface Ad{
   id?: number
@@ -97,7 +96,6 @@ export const CriarAnuncio = () => {
               children="Criar anúncio"
               height="50px"
               width="120px"
-              
             />
           </div>
         </form>

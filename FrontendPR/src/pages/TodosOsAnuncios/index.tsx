@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Anuncio } from "../../Components/Anuncio";
 import Button from "../../Components/Button";
 import "../../Components/GetAnuncios/exibir.css";
@@ -8,12 +8,12 @@ import { config } from "../../hooks/helperApi";
 import { Ad } from "../../types/Anuncio";
 import "../Usuario-Anuncio/usuario-ad.css";
 
-export const UsuarioAd = () => {
+export const TodosOsAnuncios = () => {
   const [ads, setAds] = useState<Ad[]>([]);
   const navigate = useNavigate()
 
   useEffect(() => {
-    api.get("/ads/myAds", config).then((response) => {
+    api.get("/ads", config).then((response) => {
       setAds(response.data);
     });
   }, []);
@@ -29,25 +29,24 @@ export const UsuarioAd = () => {
             price = {ad.price}
             button1 = {
               <Button
-                children="Editar"
+                children="Solicitar"
                 height="30px"
                 width="100px"
-                onClick={() => navigate(`/meusAnuncios/editar/${ad.id}`)}
+                onClick={() => {}}
+              />
+            }
+
+            button2 = {
+              <Button
+                children="Denúnciar"
+                height="30px"
+                width="100px"
+                onClick={() => {}}
               />
             }
           />
         ))
       }
-      <div className="criar-Button-user">
-        <Link to="/create/ad">
-        <Button
-          children="Criar Ad"
-          height="30px"
-          width="100px"
-          onClick={() => {}}
-          />
-          </Link>
-      </div>
     </div>
   );
 };
