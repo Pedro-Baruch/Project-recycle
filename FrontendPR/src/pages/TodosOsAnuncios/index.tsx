@@ -38,7 +38,7 @@ export const TodosOsAnuncios = () => {
 
             button2 = {
               <Button
-                children="Denúnciar"
+                children="Denunciar"
                 height="30px"
                 width="100px"
                 onClick={() => {}}
