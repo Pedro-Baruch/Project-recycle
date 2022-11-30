@@ -27,7 +27,7 @@ const Sidebar = ({ active }: ActiveProps) => {
         <Link to={"/company"}>
           <SidebarItem Icon={FaIdCardAlt} Text="Empresa" />
         </Link>
-        <Link to="/ad">
+        <Link to="/ads">
           <SidebarItem Icon={FaRegFileAlt} Text="Anuncios" />
         </Link>
         <Link to="meusAnuncios">

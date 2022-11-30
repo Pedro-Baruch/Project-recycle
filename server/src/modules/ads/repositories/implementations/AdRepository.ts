@@ -29,6 +29,11 @@ export class AdRepository implements IAdRepository {
   async findById(id: string): Promise<Ad | null> {
     const ad = await prisma.ad.findUnique({
       where: { id },
+      include: {
+        userProfile: {
+          include: { user: true },
+        },
+      },
     });
 
     if (ad) {

@@ -1,3 +1,4 @@
+import { Container } from "./style"
 
 interface AnuncioProps {
   userName?: string
@@ -12,7 +13,7 @@ interface AnuncioProps {
 
 export function Anuncio ({userName, profileImg, title, description, price, button1, button2}: AnuncioProps) {
   return (
-    <div className="container-ad">
+    <Container>
         <div className="container-Informacoes">
           <h3 className="usuario-foto">
             <img className="foto-perfil" src={profileImg}/>
@@ -33,6 +34,6 @@ export function Anuncio ({userName, profileImg, title, description, price, butto
             
           </ul>
         </div>
-    </div>
+    </Container>
   );
 }

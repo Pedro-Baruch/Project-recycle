@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Anuncio } from "../../Components/Anuncio";
-import Button from "../../Components/Button";
+import { AnuncioModal } from "../../Components/AnuncioModal";
 import "../../Components/GetAnuncios/exibir.css";
 import { api } from "../../hooks/axiosApi";
 import { config } from "../../hooks/helperApi";
@@ -23,28 +22,12 @@ export const TodosOsAnuncios = () => {
     <div>
       {
         ads.map((ad) => (
-          <Anuncio
+          <AnuncioModal
             key={ad.id}
             title = {ad.title}
             description = {ad.description}
             price = {ad.price}
-            button1 = {
-              <Button
-                children="Solicitar"
-                height="30px"
-                width="100px"
-                onClick={() => {}}
-              />
-            }
-
-            button2 = {
-              <Button
-                children="Denunciar"
-                height="30px"
-                width="100px"
-                onClick={() => {}}
-              />
-            }
+            onClick={() => navigate(`/ads/${ad.id}`)}
           />
         ))
       }

@@ -3,4 +3,11 @@ export interface Ad {
   title: string;
   description: string;
   price: number;
+  userProfileId: string
+  userProfile: {
+    profilePictureUrl: string
+    user: {
+      name: string
+    }
+  }
 }

@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: black;
   height: 100%;
   position: fixed;
+  top: 0; left: 0;
   width: auto;
   animation: showSidebar .4s;
   

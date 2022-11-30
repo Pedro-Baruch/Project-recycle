@@ -36,7 +36,6 @@ export class AdController {
     return res.status(200).json(ad);
   };
 
-  // fazer uma rota
   getMyAds = async (req: Request, res: Response): Promise<Response> => {
     const { profileId } = req.user;
 

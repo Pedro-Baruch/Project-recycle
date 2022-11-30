@@ -9,6 +9,8 @@ adRequestsRoutes.use(authenticated);
 
 adRequestsRoutes.post("/ads/:id/requestAd", userRequestsController.requestAd);
 
+adRequestsRoutes.get("/ads/:id/adRequest", userRequestsController.getAdRequest);
+
 adRequestsRoutes.get(
   "/myAds/:id/adRequests",
   userRequestsController.getAdRequests

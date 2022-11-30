@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Container } from "./styles";
 import { FaBars } from "react-icons/fa";
 import Sidebar from "../SideBar";
+import { Container } from "./styles";
 
 export const Header = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -10,8 +10,11 @@ export const Header = () => {
 
   return (
     <Container>
-      <FaBars onClick={showSiderbar} />
-      {sidebar && <Sidebar onClick={setSidebar} active={setSidebar} />}
+      <div className="setSiderbar">
+        <FaBars onClick={showSiderbar} />
+        {sidebar && <Sidebar onClick={setSidebar} active={setSidebar} />}
+      </div>
+      <h2 style={{ color: "White", textAlign: "left" }}>ProjectRecycle</h2>
     </Container>
   );
 };

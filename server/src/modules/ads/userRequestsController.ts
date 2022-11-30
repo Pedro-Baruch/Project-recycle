@@ -25,6 +25,16 @@ export class UserRequestsController {
     return res.status(200).json(adRequests);
   };
 
+  getAdRequest = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { profileId } = req.user;
+    const adRequests = await this.userRequestsService.findRequestByAd(
+      id,
+      profileId
+    );
+    return res.status(200).json(adRequests);
+  };
+
   acceptRequest = async (req: Request, res: Response) => {
     const { id, adRequestId } = req.params;
     const { responseToRequest } = req.body;

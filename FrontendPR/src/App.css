@@ -5,7 +5,6 @@
   outline: none;
   box-sizing: border-box;
   font-family: 'Sen', sans-serif;
-  
 }
 
 li{
@@ -13,10 +12,24 @@ li{
 }
 
 .ContainerApp{
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+}
+
+.ContainerPages{
+  margin-top: 8rem;
+  height: 100%;
 }
 
 body {
   background-color: #272727;
+}
+
+@media(max-width: 845px) {
+  html {
+    font-size: 55%;
+  }
+
+  .ContainerPages{
+    margin-top: 16rem;
+  }
 }

@@ -28,6 +28,17 @@ export class UserRequestRepository implements IUserRequestRepository {
     return requests;
   }
 
+  async findRequestByAd(
+    adId: string,
+    userProfileId: string
+  ): Promise<UserRequest> {
+    const requests = await prisma.userRequests.findMany({
+      where: { adId, accepted: null, userProfileId },
+    });
+
+    return requests[0];
+  }
+
   async findRequestsByAdAndUser(
     adId: string,
     userProfileId: string

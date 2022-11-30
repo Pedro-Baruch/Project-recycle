@@ -10,6 +10,7 @@ import { CriarEmpresa } from "./pages/Criar-Empresa";
 import { DeletarAnuncio } from "./pages/DeletarAnuncio";
 import { EditarAnuncio } from "./pages/EditarAnuncio";
 import { Home } from "./pages/Home";
+import { InfoAnuncio } from "./pages/InfoAnuncio";
 import { Login } from "./pages/Login";
 import { PerfilCompanies } from "./pages/Perfil-Empresa";
 import { PerfilUsuario } from './pages/Perfil-Usuario/index';
@@ -35,7 +36,8 @@ function App() {
             <Route path="/create/company" element={<CriarEmpresa />} />
             <Route path="/profile/user" element={<PerfilUsuario />} />
             <Route path="/profile/company" element={<PerfilCompanies />} />
-            <Route path="/ad" element={<TodosOsAnuncios/>} />
+            <Route path="/ads" element={<TodosOsAnuncios/>} />
+            <Route path="/ads/:id" element={<InfoAnuncio/>} />
             <Route path="/company" element={<UsuarioCompany/>} />
             <Route path="/criar/denuncia" element={<CriarDenuncia/>} />
             <Route path="/criar/avaliacao" element={<CriarAvalicao/>} />

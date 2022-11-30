@@ -56,6 +56,17 @@ export class UserRequestsService {
     return requests;
   };
 
+  findRequestByAd = async (adId: string, currentUserProfileId: string) => {
+    const ad = await this.adService.findAdById(adId);
+
+    const requests = await this.userRequestRepository.findRequestByAd(
+      adId,
+      currentUserProfileId
+    );
+
+    return requests;
+  };
+
   findAdRequest = async (adRequestId: string) => {
     const adRequest = await this.userRequestRepository.findAdRequest(
       adRequestId
